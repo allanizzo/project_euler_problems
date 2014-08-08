@@ -2,8 +2,8 @@
 # 	^ includes calculation time, which is a long time
 	# imma leave now, still waiting at 8:06
 
-	# NOTE THAT THE BELOW CODE WORKS FOR THE EXAMPLE IN THE PROBLEM,
-	# WHERE IT FINDS THE SMALLEST MULTIPLE DIVISIBLE BY (1..10)
+# GOT IT, DID WELL.  TOOK A LONG TIME TO CALCULATE, SHOULD HAVE KEPT TRACK
+# OF THE CALCULATION TIME
 
 
 # 2520 is the smallest number that can be divided by each of the
@@ -44,3 +44,16 @@ def smallest_multiple()
 end
 
 p smallest_multiple
+
+# ANSWER => 232792560
+
+# what did we learn?
+# - took a long time to calculate, stepping up by 1 would have been a disaster
+# 	^ stepping up by 20 (because the number has to be divisible by 20) was a good
+# 	idea even though it still took forever to calculate
+# - overall you got the bones of code together pretty quickly, maybe 10 mins or less
+#   so i think thats an improvement
+# - good use of range iterator (num1..num2).each
+
+# - really my only comment is that you should have started stepping by 20 from the
+# 	beginning.
