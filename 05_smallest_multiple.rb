@@ -2,6 +2,9 @@
 # 	^ includes calculation time, which is a long time
 	# imma leave now, still waiting at 8:06
 
+	# NOTE THAT THE BELOW CODE WORKS FOR THE EXAMPLE IN THE PROBLEM,
+	# WHERE IT FINDS THE SMALLEST MULTIPLE DIVISIBLE BY (1..10)
+
 
 # 2520 is the smallest number that can be divided by each of the
 # numbers from 1 to 10 without any remainder.
