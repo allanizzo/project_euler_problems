@@ -37,7 +37,6 @@ def one_to_one_thousand()
 						60 => "sixty", 70 => "seventy",
 						80 => "eighty",90 => "ninety"
 						}					
-
 	hundreds = {100=>"one hundred", 200 => "two hundred",
 				300 => "three hundred", 400 => "four hundres",
 				500 => "five hundred", 600 => "six hundred",
@@ -46,7 +45,7 @@ def one_to_one_thousand()
 
 	one_thousand = {1000 => "one thousand"}			
 
-	(1..100).each do |num|
+	(1..1000).each do |num|
 		if num < 10
 			p one_to_nine[num]
 		elsif num < 20
@@ -58,6 +57,27 @@ def one_to_one_thousand()
 				ones_place = num % 10
 				p "#{twenty_to_ninety[num-ones_place]} #{one_to_nine[ones_place]}"
 			end
+		elsif num < 1000
+			if num %100 == 0
+				p hundreds[num]
+			else
+				hundreds_remainder = num % 100
+				if hundreds_remainder < 10
+					p "#{hundreds[num - hundreds_remainder]} #{one_to_nine[hundreds_remainder]}"
+				elsif hundreds_remainder < 20
+					p "#{hundreds[num - hundreds_remainder]} #{ten_to_nineteen[hundreds_remainder]}"
+				elsif hundreds_remainder < 100
+					if hundreds_remainder % 10 == 0
+						p "#{hundreds[num - hundreds_remainder]} #{twenty_to_ninety[hundreds_remainder]}"
+					else
+						tens_remainder = hundreds_remainder % 10
+						p "#{hundreds[num - hundreds_remainder]} #{twenty_to_ninety[hundreds_remainder - tens_remainder]} #{one_to_nine[tens_remainder]}"
+					end
+				end
+			end
+		elsif num == 1000
+			p one_thousand[num]
+				
 		end
 				
 	end
