@@ -1,6 +1,7 @@
 
+# time taken - a lot
 
-
+# SOLVED 
 
 
 # If the numbers 1 to 5 are written out in words:
@@ -20,6 +21,9 @@
 
 
 def one_to_one_thousand()
+
+	mega_string = ""
+
 	one_to_nine = {1 => "one", 2 => "two",
 				3 => "three", 4 => "four",
 				5 => "five", 6 => "six",
@@ -47,45 +51,66 @@ def one_to_one_thousand()
 
 	(1..1000).each do |num|
 		if num < 10
-			p one_to_nine[num]
+			# p one_to_nine[num]
+			mega_string << " " + one_to_nine[num]
 		elsif num < 20
-			p ten_to_nineteen[num]
+			# p ten_to_nineteen[num]
+			mega_string << " " + ten_to_nineteen[num]
 		elsif num < 100
 			if num % 10 == 0
-				p twenty_to_ninety[num]
+				# p twenty_to_ninety[num]
+				mega_string << " " + twenty_to_ninety[num]
 			else
 				ones_place = num % 10
-				p "#{twenty_to_ninety[num-ones_place]} #{one_to_nine[ones_place]}"
+				# p "#{twenty_to_ninety[num-ones_place]} #{one_to_nine[ones_place]}"
+				mega_string << " " + "#{twenty_to_ninety[num-ones_place]} #{one_to_nine[ones_place]}"
 			end
 		elsif num < 1000
 			if num %100 == 0
-				p hundreds[num]
+				# p hundreds[num]
+				mega_string << " " + hundreds[num]
 			else
 				hundreds_remainder = num % 100
 				if hundreds_remainder < 10
-					p "#{hundreds[num - hundreds_remainder]} #{one_to_nine[hundreds_remainder]}"
+					# p "#{hundreds[num - hundreds_remainder]} and #{one_to_nine[hundreds_remainder]}"
+					mega_string << " " + "#{hundreds[num - hundreds_remainder]} and #{one_to_nine[hundreds_remainder]}"
 				elsif hundreds_remainder < 20
-					p "#{hundreds[num - hundreds_remainder]} #{ten_to_nineteen[hundreds_remainder]}"
+					# p "#{hundreds[num - hundreds_remainder]} and #{ten_to_nineteen[hundreds_remainder]}"
+					mega_string << " " + "#{hundreds[num - hundreds_remainder]} and #{ten_to_nineteen[hundreds_remainder]}"
 				elsif hundreds_remainder < 100
 					if hundreds_remainder % 10 == 0
-						p "#{hundreds[num - hundreds_remainder]} #{twenty_to_ninety[hundreds_remainder]}"
+						# p "#{hundreds[num - hundreds_remainder]} and #{twenty_to_ninety[hundreds_remainder]}"
+						mega_string << " " + "#{hundreds[num - hundreds_remainder]} and #{twenty_to_ninety[hundreds_remainder]}"
 					else
 						tens_remainder = hundreds_remainder % 10
-						p "#{hundreds[num - hundreds_remainder]} #{twenty_to_ninety[hundreds_remainder - tens_remainder]} #{one_to_nine[tens_remainder]}"
+						# p "#{hundreds[num - hundreds_remainder]} and #{twenty_to_ninety[hundreds_remainder - tens_remainder]} #{one_to_nine[tens_remainder]}"
+						mega_string << " " + "#{hundreds[num - hundreds_remainder]} and #{twenty_to_ninety[hundreds_remainder - tens_remainder]} #{one_to_nine[tens_remainder]}"
 					end
 				end
 			end
 		elsif num == 1000
-			p one_thousand[num]
+			# p one_thousand[num]
+			mega_string << " " + one_thousand[num]
 				
 		end
 				
 	end
+	return mega_string
 end
 
-p one_to_one_thousand()
+# p one_to_one_thousand()
 
 
+def char_count(string)
+	char_count = 0
+	string.each_char do |char|
+		if char.match(/[a-z]/)
+			char_count += 1
+		end
+	end
+	return char_count
+end
 
+p char_count(one_to_one_thousand())
 
 
