@@ -1,3 +1,9 @@
+
+# time taken - mad long
+
+#SOLVED BRUTE FORCE STYLE
+
+
 # By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
 
 # 3
@@ -47,19 +53,56 @@ whack_arnolds_triangle =
 %w[04 62 98 27 23 09 70 98 73 93 38 53 60 04 23] 
 
 
-def super_max_ultra_megasum(some_whack_triangle)
-
-
-# TRY AGAIN
-
-
+def path_generator()
+	previous = Random.new
+	step = previous.rand(0..1)
+	path = [0]
+	path << step
+	index = 1
+	13.times do 
+		temp_path = path[-1]
+		# p temp_path
+		random_generator = previous.rand(0..1)
+		if random_generator == 0
+			path << temp_path
+		elsif random_generator == 1
+			path << temp_path + 1
+		end
+	end
+	return path
 end
 
-super_max_ultra_megasum(whack_arnolds_triangle)
+# p path_generator
 
 
-# 0 can do 0 or 1 in next array
-# 1 can do 1 or 2 in next array
-# 2 can do 2 or 3 in next array 
+def sum_checker(some_whack_triangle)
+	basher = 0
+	largest_sum = 0
+	while basher < 100000
+		temp_sum = 0
+		new_path = path_generator()
 
-# etc...
+		some_whack_triangle.each_with_index do |row,index|
+			temp_sum += row[new_path[index]].to_i
+			# p row[new_path[index]]
+			# p "index is #{index}"
+			# p new_path[index]
+		end
+		if temp_sum > largest_sum
+			largest_sum = temp_sum
+		end
+
+		basher += 1
+	end
+	return largest_sum
+end
+
+p sum_checker(whack_arnolds_triangle)
+
+
+# what did we learn?
+# - this problem was a little tricky, mostly in decoding the strategy
+# - it works by generating a random path where new elements are adjacent
+# - then it sums up each element in the arrays
+# - setting the temp_path[-1] and then keeping it or adding 1 to it
+# 	in the next row was the juice of the problem
