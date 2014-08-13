@@ -1,6 +1,3 @@
-
-
-
 # alrighty
 
 # special pythagorean triplets
@@ -22,28 +19,30 @@
 # a b c
 
 def pythag()
-	a = -1000
-	b = -1000
-	c = -1000
+	
+	# so if we have a and b then we have c (same goes for c**2)
+	# just need to check the jawn and see if its the triplet that you want
 
-	while a <= 1000
-		b = a + 1
-		while b <= 1000
-			c = b + 1
-			while c <= 1000
-				p "#{a**2} #{b**2} #{c**2}"
-				c += 1
+	(1...1000).each do |a|
+		b_range = a+1
+		(b_range...1000).each do |b|
+			c = (1000 - (a+b))
+			# if a+b+c == 1000
+			# 	puts "okey"
+			if ((a**2 + b**2) == c**2) && (a+b+c == 1000) && a < b < c
+				puts "mowjiggle"
+				p "a is #{a}  b is #{b} and c is #{c}"
+				p "product of a*b*c == #{a*b*c}"
+				return a*b*c	
 			end
-			b += 1
 		end
-		a += 1
+
 	end
+
 
 end
 
 p pythag()
-
-
 
 
 
