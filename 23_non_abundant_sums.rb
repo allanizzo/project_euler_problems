@@ -30,8 +30,6 @@
 # positive integers which cannot
 # be written as the sum of two abundant numbers.
 
-
-
 def arr_sum(arr)
 	sum = 0
 
@@ -89,16 +87,6 @@ def abundant_maker()
 	return abundant_array
 end
 
-
-def abundant_sum_II()
-
-
-
-end
-
-# p abundant_sum_II
-
-
 abun1 = abundant_maker()
 
 # p abun1
@@ -106,7 +94,6 @@ abun1 = abundant_maker()
 stack_madness = stack_add(abun1)
 
 # p stack_madness
-
 
 madness_array = []
 
@@ -121,3 +108,9 @@ end
 madness_sum = arr_sum(madness_array)
 
 p "madness sum is #{madness_sum}"
+
+
+# what did we learn?
+# - really need to come back and have a look
+# 	^ I dont understand why I need line 58 but adding the logic
+# 	there made the difference in the problem
