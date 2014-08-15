@@ -1,4 +1,9 @@
+# time taken - mad long, look to end for recap
 
+# why did we have to impose the second limit for sums over the limit from the problem?
+# shouldnt your code have covered for this?
+
+# SOLVED
 
 
 # A perfect number is a number for
@@ -27,114 +32,92 @@
 
 
 
+def arr_sum(arr)
+	sum = 0
+
+	arr.each do |ele|
+		sum += ele
+	end
+	return sum
+end
 
 
-# SEE BELOW::
+def stack_add(arr) # this returns the array of all possible sums
+	array_of_all_possible_sums = []
+	num_loops = arr.count
+	counter = 0					# of two elements
+	num_loops.times do
+
+		first_element = arr[0]
+
+		if counter % 1000 == 0
+			p counter
+		end
+		
+		for num in arr
+			temp_sum = 0
+			temp_sum = first_element + num
+			if temp_sum < 28123
+				array_of_all_possible_sums << temp_sum
+			end
+		end
+		element_to_add = arr.shift
+		arr << element_to_add
+		counter += 1
+	end
+	return array_of_all_possible_sums.uniq.sort  # so we have an array of all the possible sums of 
+end
+
+def abundant_maker()
+	abundant_array = []
+	(1..28123).each do |number|
+		if number % 1000 == 0
+			p number
+		end
+		base = 1
+		sum = 0
+		while base < number
+			if number % base == 0
+				sum += base
+			end
+			base += 1
+		end
+		if sum > number
+			abundant_array << number
+		end
+	end
+	return abundant_array
+end
+
+
+def abundant_sum_II()
 
 
 
-
-
-
-
-
-# non_abundant_sums.rb
-
-# what i would do this this,
-
-# create a master array of abundant numbers
-
-# then create an array of digits up to 28123 (including it)
-
-# subtract the abundant array from the master array
-
-# sum those numbers
-
-# def arr_sum(arr)
-# 	sum = 0
-
-# 	arr.each do |ele|
-# 		sum += ele
-# 	end
-# 	return sum
-# end
-
-
-# def stack_add(arr) # this returns the array of all possible sums
-# 	array_of_all_possible_sums = []
-# 	num_loops = arr.count
-# 	counter = 0					# of two elements
-# 	num_loops.times do
-# 		if counter % 1000 == 0
-# 			p counter
-# 		end
-# 		element_to_add = arr.shift
-# 		for num in arr
-# 			temp_sum = 0
-# 			temp_sum = element_to_add + num
-# 			array_of_all_possible_sums << temp_sum
-# 		end
-# 		arr << element_to_add
-# 		counter += 1
-# 	end
-# 	return array_of_all_possible_sums
-# end
-
-# def abundant_maker()
-# 	abundant_array = []
-# 	(1..28123).each do |number|
-# 		if number % 1000 == 0
-# 			p number
-# 		end
-# 		base = 1
-# 		sum = 0
-# 		while base < number
-# 			if number % base == 0
-# 				sum += base
-# 			end
-# 			base += 1
-# 		end
-# 		if sum > number
-# 			abundant_array << number
-# 		end
-# 	end
-# 	return abundant_array
-# end
-
-# # p abundant_maker
-
-# # def abundant_sum()
-# # 	sum_array = []
-# # 	abundant_array = abundant_maker()
-
-# # 	combo_array = abundant_array.combination(2).to_a
-# # 	p combo_array
-# # 	for combo in combo_array
-
-# # 		sum_array << arr_sum(combo)
-# # 	end
-# # 	return sum_array
-# # end
-
-# def abundant_sum_II()
-# 	sum_array = abundant_maker()
-
-# 	list_of_sums = stack_add(sum_array)
-
-# 	max = list_of_sums.uniq.max
-
-# 	array_to_return = []
-
-# 	(1..max).each do |num|
-# 		array_to_return << num
-# 	end
-# 	result = arr_sum(array_to_return - (list_of_sums.uniq))
-# 	puts "arr sum is #{result}"
-# 	return result
-# end
+end
 
 # p abundant_sum_II
 
-# # p abundant_sum
 
-# # other way to add is to use the abundant_array as a stack
+abun1 = abundant_maker()
+
+# p abun1
+
+stack_madness = stack_add(abun1)
+
+# p stack_madness
+
+
+madness_array = []
+
+(1..stack_madness.max).each do |stackadeezy|
+	if stack_madness.include?(stackadeezy) == false
+		madness_array << stackadeezy
+	end
+end
+
+# p madness_array
+
+madness_sum = arr_sum(madness_array)
+
+p "madness sum is #{madness_sum}"
