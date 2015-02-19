@@ -108,10 +108,10 @@ def super_max_multo_bonanza()
     multiplicand = 1
     product = 1
     pandigilist = []
-    while multiplicand < 5000
-        if multiplicand % 100 == 0
-            p multiplicand
-        end
+    while multiplicand < 2000
+        # if multiplicand % 500 == 0
+        #     p multiplicand
+        # end
         product = multiplier*multiplicand
         if is_pandigital(multiplier,multiplicand,product) == true
             # max_multiplicand = multiplicand
@@ -125,21 +125,30 @@ def super_max_multo_bonanza()
         end
     end
     # return [max_multiplier, max_multiplicand]
+    # p pandigilist
+    # p pandigilist.sort.uniq
     return pandigilist
 end
 
 # p super_max_multo_bonanza
 
 def pandigisummer()
+    sum_check_array = []
     pandigiarray = super_max_multo_bonanza
 
     sum = 0
 
     pandigiarray.each do |summer|
-        sum += summer[2]
+        if sum_check_array.include?(summer[2]) == false
+            sum_check_array << summer[2]
+            sum += summer[2]
+        end
     end
+    p "sum_check_array"
+    p sum_check_array
+    p "pandigiarray"
     p pandigiarray
-    p "and the sum is #{sum}"
+    p "and the sum of sum_check_array is #{sum}"
     return sum
 end
 
