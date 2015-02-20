@@ -118,7 +118,7 @@ def mad_english_coinage()
 
     combo_array = []
     damper = 0
-    while damper < 1300000000
+    while damper < 1000000
     # while damper < 100
         if damper % 10000000 == 0
             p damper
@@ -140,8 +140,8 @@ def mad_english_coinage()
     sorted_uniq_array = uniq_array.uniq
     p sorted_uniq_array
     p "drumroll please..."
-    p "sorted_uniq_array.count is #{sorted_uniq_array.count+1}" #the +1 is to account for the 1 200 pound note
-    
+    p "sorted_uniq_array.count is #{sorted_uniq_array.count}" #the +1 is to account for the 1 200 pound note
+    p "sorted_uniq_array.count is #{sorted_uniq_array.count+1}"
 end
 
 mad_english_coinage()
