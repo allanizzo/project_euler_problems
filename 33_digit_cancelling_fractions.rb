@@ -41,14 +41,22 @@ def reducer(numerator,denominator)
 	if num_string[1] == denom_string[0]
 		num_string = num_string[0]
 		denom_string = denom_string[1]
-		if num_string.to_f/denom_string.to_f == base_answer
+		if num_string.to_f/denom_string.to_f == base_answer && num_string != denom_string
 			return true
 		end
 	end
 	return false
 end
 
-
+def product_maker(list)
+	num_product = 1
+	denom_product = 1
+	for embedded_list in list
+		num_product = num_product*embedded_list[0]
+		denom_product = denom_product*embedded_list[1]
+	end
+	return [num_product,denom_product]
+end
 
 def fraction_creator()
 	list_of_denominators = []
@@ -70,7 +78,8 @@ def fraction_creator()
 	# here we create the loops for the numerator and denominator
 	# by calling reducer and if true, adding to list
 	# and returning the answer
-	return list_of_denominators
+	p list_of_denominators
+	return product_maker(list_of_denominators)
 end
 
-p fraction_creator
+p fraction_creator()
