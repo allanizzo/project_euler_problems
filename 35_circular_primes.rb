@@ -32,6 +32,7 @@ def prime_list_creator(maxx)
 		end
 		count += 1
 	end
+	return prime_list
 	# creates list of primes up to max loop (in this case 1,000,000)
 end
 
@@ -42,6 +43,7 @@ end
 
 def looper()
 	max = 1000000
+	prime list = prime_list(max)
 # calls is_circular
 
 end 
