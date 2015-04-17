@@ -12,12 +12,18 @@
 
 
 def is_prime(num)
-	count = 2
-	while count < num
-		if num%count == 0
-			return false
+	if num == 2 || num == 3 || num == 5
+		return true
+	elsif num.even? == true || num.to_s[-1] == "0" || num.to_s[-1] == "5" #|| num.to_s[-1] != "3" || num.to_s[-1] != "1" || num.to_s[-1] != "7" || num.to_s[-1] != "9"
+		return false
+	else
+		count = 3
+		while count < num
+			if num%count == 0
+				return false
+			end
+			count += 2
 		end
-		count += 1
 	end
 	return true
 end
@@ -42,7 +48,7 @@ def prime_list_creator(maxx)
 end
 
 # p prime_list_creator(1000000)
-
+# 
 def is_circular(num, list)
 	num_string = num.to_s
 	string_length = num_string.length
@@ -58,6 +64,10 @@ def is_circular(num, list)
 	end
 	return false
 end
+
+# p is_circular(996361)
+# p is_circular(998443)
+# p is_circular(999917)
 
 def looper()
 	max = 1000000
