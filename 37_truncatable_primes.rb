@@ -20,13 +20,15 @@ def quick_num_checker(num)
     num = num.to_s
     if num == "5"
         return true
+    elsif num == "1"
+        return false
     elsif num == "2"
         return true
     elsif num == "3"
         return true
     elsif num == "7"
         return true   
-    elsif num.include?("1") || num.include?("0") || num.include?("2") || num.include?("4") || num.include?("5") || num.include?("6") || num.include?("8")
+    elsif num.include?("0") || num.include?("2") || num.include?("4") || num.include?("5") || num.include?("6") || num.include?("8")
         return false
     # elsif num[-1]=="2"
     #     return false
@@ -45,12 +47,16 @@ end
            
            
 def is_prime(num)
-    divisor = 2
-    while divisor < num
-        if num % divisor == 0
-            return false
+    if num == 1
+        return false
+    else          
+        divisor = 2
+        while divisor < num
+            if num % divisor == 0
+                return false
+            end
+            divisor += 1
         end
-        divisor += 1
     end
     return true
 end
@@ -78,6 +84,7 @@ def to_the_left_truncator(num)#, list)
         num = num.to_s
         count = num.length-1 # "23456"
         while count >= 0
+            # p num
             num = num[0...count]
             if is_prime(num.to_i) == false
                 return false
@@ -88,25 +95,26 @@ def to_the_left_truncator(num)#, list)
     return true
 end
 
-
-
 def to_the_right_truncator(num)
-    num = num.to_s.reverse
-    count = num.length-1 # "23456"
-    while count >= 0
-        num = num[0...count]
+    num = num.to_s
+    str_index = num.length-1
+    count = 0 # 3797
+    while count <= str_index
+        # p num
+        num = num[1..-1]
         if is_prime(num.to_i) == false
             return false
         end
-        count = count - 1
+        count += 1
     end
 # end
     return true
-
 end
 
 p to_the_left_truncator(3797)
 p to_the_right_truncator(3797)
+
+p 
 
 def looper()
     max = 10000000
@@ -124,7 +132,7 @@ def summer()
     loop_list = looper()
     sum = 0
     loop_list.each do |sumnasty|
-        if sumnasty.to_i > 99
+        if sumnasty.to_i > 9
             sum += sumnasty.to_i
         end
     end
@@ -142,12 +150,12 @@ end
 #     end
 # end
 
-p prime_lister
+# p prime_lister
 
-# p summer
+# p summer()
 
-# 7973571
+# 797992
 
 # p prime_list_creator(1000000)
 
-# p looper()
+p looper()
