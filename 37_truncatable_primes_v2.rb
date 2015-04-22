@@ -17,39 +17,51 @@
 # to be truncatable primes.
 
 
-def quick_num_checker(num)
-    num = num.to_s
-    if num == "5"
-        return true
-    elsif num == "1"
-        return false
-    elsif num == "2"
-        return true
-    elsif num == "3"
-        return true
-    elsif num == "7"
-        return true   
-    elsif num.include?("0") || num.include?("2") || num.include?("4") || num.include?("5") || num.include?("6") || num.include?("8")
-        return false
-    # elsif num[-1]=="2"
-    #     return false
-    # elsif num[-1]=="4"
-    #     return false
-    # elsif num[-1]=="5"
-    #     return false
-    # elsif num[-1]=="6"
-    #     return false
-    # elsif num[-1]=="8"
-    #     return false
-    else
-        return true
-    end
-end
-       
+# def quick_num_checker(num)
+#     num = num.to_s
+#     if num == "5"
+#         return true
+#     elsif num == "1"
+#         return false
+#     elsif num == "2"
+#         return true
+#     elsif num == "3"
+#         return true
+#     elsif num == "7"
+#         return true   
+#     elsif num.include?("0") || num.include?("2") || num.include?("4") || num.include?("5") || num.include?("6") || num.include?("8")
+#         return false
+#     # elsif num[-1]=="2"
+#     #     return false
+#     # elsif num[-1]=="4"
+#     #     return false
+#     # elsif num[-1]=="5"
+#     #     return false
+#     # elsif num[-1]=="6"
+#     #     return false
+#     # elsif num[-1]=="8"
+#     #     return false
+#     else
+#         return true
+#     end
+# end
+
+# def quick_check(num)
+#     num_string = num.to_s
+#     if num_string.include?("0") == true
+#         return false
+#     elsif num_string.include?("2") == true || num_string.include?("4") || num_string.include?("5") || num_string.include?("6") || num_string.include?("8")
+#         return false  
+#     else
+#         return true
+#     end
+# end
            
 def is_prime(num)
     if num == 1
         return false
+    # elsif quick_check(num)== false
+    #     return false
     else          
         divisor = 2
         while divisor < num
@@ -65,20 +77,22 @@ end
 
 def prime_list_creator(max)
     prime_list = []
-    count = 0
+    count = 1
     while count < max
-        if count % 100000 == 0
+        if count % 10001 == 0
             p count
         end
-        if quick_num_checker(count) == true
+        if is_prime(count) == true
             # if is_prime(count) == true
             prime_list << count.to_s
             # end
         end
-        count += 1
+        count += 2
     end
     return prime_list
 end
+
+# p prime_list_creator(100000)
 
 def to_the_left_truncator(num)#, list)
     # if list.include?(num)
@@ -112,14 +126,15 @@ def to_the_right_truncator(num)
     return true
 end
 
-p to_the_left_truncator(3797)
-p to_the_right_truncator(3797)
-p to_the_right_truncator(73377973)
+# p to_the_left_truncator(3797)
+# p to_the_right_truncator(3797)
+# p to_the_right_truncator(73377973)
 
 def looper()
-    max = 10000000
+    max = 1000000
     trunc_list = []
     prime_list = prime_list_creator(max)
+    # p prime_list
     prime_list.each do |mower|
         if to_the_left_truncator(mower) == true && to_the_right_truncator(mower) == true
             trunc_list << mower
@@ -127,6 +142,13 @@ def looper()
     end
     return trunc_list
 end
+
+
+
+
+
+
+
 
 def summer()
     loop_list = looper()
@@ -158,4 +180,4 @@ end
 
 # p prime_list_creator(1000000)
 
-# p looper()
+p looper()
