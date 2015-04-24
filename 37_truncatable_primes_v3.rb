@@ -1,6 +1,6 @@
 # 37_truncatable_primes.rb
 
-
+# solved, calctime long, sum doesnt work
 
 # The number 3797 has an interesting property.
 # Being prime itself, it is possible to
