@@ -74,8 +74,8 @@ end
 
 p to_the_left_truncator(3797)
 p to_the_right_truncator(3797)
-p to_the_left_truncator(739397)
-p to_the_right_truncator(739397)
+p to_the_left_truncator(3797)
+p to_the_right_truncator(3797)
 
 
 def looper()
