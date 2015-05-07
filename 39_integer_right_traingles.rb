@@ -16,6 +16,8 @@
 # 	return sum
 # end
 
+# i has removed the change
+
 def pythag_theorem(side1,side2,side3)
 	if (side1**2 + side2**2) == side3**2
 	# 	return true
