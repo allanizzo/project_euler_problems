@@ -67,7 +67,7 @@ def pythag_two()
 			# dora_will_be_a_good_doctor << [a**2,b**2,temp_c]
 			# p "#{a},#{b},#{temp_c**0.5}"
 			if integerizer(temp_c**0.5) == true && summer([a,b,temp_c**0.5]) <= 1000
-				dora_will_be_a_good_doctor << [a,b,temp_c**0.5]
+				dora_will_be_a_good_doctor << [a,b,temp_c**0.5].sort
 			end
 			b += 1
 		end
@@ -93,29 +93,31 @@ p pythag_two
 
 
 
-# def perim_counter()
-# 	perims_dict = {}
-# 	the_provider = 0
-# 	while the_provider <= 1000
-# 		perims_dict[the_provider] = 0
-# 	end
-# 	perims_list = pythag_two()
-# 	perims_list.each do |item|
-# 		perimeter = summer(item).to_i
-# 		perims_dict[perimeter] += 1
-# 		# p perimeter
-# 	end
-# 	max_val = [0,0]
-# 	perims_dict.each do |key, value|
-# 		if value > max_val[1]
-# 			max_val[0] = key
-# 			max_val[1] = value
-# 		end
-# 	end
-# 	return max_val
-# end
+def perim_counter()
+	perims_dict = {}
+	the_provider = 0
+	while the_provider <= 1000
+		perims_dict[the_provider] = 0
+		the_provider += 1
+	end
+	perims_list = pythag_two().uniq
+	perims_list.each do |item|
+		perimeter = summer(item).to_i
+		perims_dict[perimeter] += 1
+		# p perimeter
+	end
+	p perims_dict
+	max_val = [0,0]
+	perims_dict.each do |key, value|
+		if value > max_val[1]
+			max_val[0] = key
+			max_val[1] = value
+		end
+	end
+	return max_val
+end
 
-# p perim_counter
+p perim_counter
 
 
 # p integerizer(3.0000)
