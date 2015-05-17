@@ -42,9 +42,10 @@
 def mad_pentagonals()
 	pent_hash = {}
 	hash_buffer = 50000
+	maximum_loops = 10000
 	pentags_list_1 = []
 	pentags_list_2 = []
-	(1..1000).each do |num|
+	(1..maximum_loops).each do |num|
 		if num % 1000 == 0
 			p num
 		end
@@ -124,7 +125,8 @@ def hash_check()
 		pj = 0
 		while pj <= list_of_pentags.count-1
 			diff_abs = (list_of_pentags[pk]-list_of_pentags[pj]).abs
-			if is_pentagonal(diff_abs, pent_hash, hash_buffer) == true
+			sum_adds = (list_of_pentags[pk]+list_of_pentags[pj])
+			if is_pentagonal(diff_abs, pent_hash, hash_buffer) == true && is_pentagonal(sum_adds,pent_hash,hash_buffer) == true
 				if diff_abs < smallest_diff
 					diff_list = "pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"
 				# diff_list << ["pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"]
@@ -142,6 +144,8 @@ def hash_check()
 end
 
 p hash_check
+
+#  TRY 1 --> "pk is 998, pj is 958 and diff is 117460"
 
 #############################################################################
 #############################################################################
