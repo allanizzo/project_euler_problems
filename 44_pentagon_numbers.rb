@@ -43,11 +43,16 @@ def mad_pentagonals()
 	pent_hash = {}
 	hash_buffer = 50000
 	pentags_list_1 = []
-
-	(1..10000).each do |num|
+	pentags_list_2 = []
+	(1..1000).each do |num|
+		if num % 1000 == 0
+			p num
+		end
 		pentag = num*((3*num)-1)/2
 		pentags_list_1 << pentag
+		pentags_list_2 << pentag
 	end
+	# pentags_list_2 = pentags_list_1
 	# p pentags_list_1
 	# p pentags_list_1.max 
 	number_of_hashes = pentags_list_1.max/hash_buffer
@@ -69,12 +74,79 @@ def mad_pentagonals()
 			end
 		end
 	end
-	return pent_hash
+	# p pentags_list_2
+	# p pent_hash
+	# pent_hash.each do |key, value|
+		# p key
+	# end
+	# p pent_hash[50000]
+	return pent_hash, hash_buffer, pentags_list_2
 end
 
-# def hash_populator()
+# mad_pentagonals
 
-p mad_pentagonals
+def is_pentagonal(num, hashtable, hash_buffer)
+	# step one is to find the right key in the dictionary
+
+	# so num comes in, see how many times hash_buffer comes 
+	# p hashtable
+	hash_index = (num/hash_buffer) + 1
+	key_lookup = hash_index*hash_buffer # need to check for 0-50k here
+	# hashtable.each do |key, value|
+		# p "key is #{key}"
+	# end
+
+	if hashtable[key_lookup] == nil
+		return false
+	elsif hashtable[key_lookup].include?(num) == true
+		return true
+	else
+		return false
+	end
+
+	# step two is to return the value (list) and run .include?
+end
+
+# p is_pentagonal(852397,mad_pentagonals, 50000)
+
+def hash_check()
+	# what is the goal here?
+	# the goal is the check whether sums or differences are pentagonal
+	# and then record progress
+	# so you are working with a joint where keys are threshholds and the value
+	# is a list of all the numbers that fit good
+	pent_hash, hash_buffer, list_of_pentags = mad_pentagonals()
+	pk = 0
+	smallest_diff = 5**800 # large number so it will be guaranteed to come down
+	# p list_of_pentags
+	diff_list = []
+	while pk <= list_of_pentags.count-1
+		pj = 0
+		while pj <= list_of_pentags.count-1
+			diff_abs = (list_of_pentags[pk]-list_of_pentags[pj]).abs
+			if is_pentagonal(diff_abs, pent_hash, hash_buffer) == true
+				if diff_abs < smallest_diff
+					diff_list = "pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"
+				# diff_list << ["pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"]
+			# must check if diff is pentagonal
+			# we must take the diff and plug it into the hash in the right place for .include?
+			# p "diff_abs is #{diff_abs}"
+				end
+			end
+			pj += 1
+		end
+		pk += 1
+	end
+	return diff_list
+	# idk if you solved anything tho
+end
+
+p hash_check
+
+#############################################################################
+#############################################################################
+#############################################################################
+#############################################################################
 
 # def is_pentagonal(num, list)
 # 	if list.include?(num) == true
@@ -83,16 +155,6 @@ p mad_pentagonals
 # 		return false
 # 	end
 # end
-
-def hash_check()
-	# what is the goal here?
-	# the goal is the check whether sums or differences are pentagonal
-	# and then record progress
-	# so you are working with a joint where keys are thresholds and the values
-	# are empty lists
-	pent_hash = mad_pentagonals()
-end
-
 
 
 # def big_check()
