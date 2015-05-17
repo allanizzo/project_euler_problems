@@ -42,25 +42,39 @@
 def mad_pentagonals()
 	pent_hash = {}
 	hash_buffer = 50000
+	pentags_list_1 = []
+
 	(1..10000).each do |num|
 		pentag = num*((3*num)-1)/2
-		pentags_0_10000 << pentag	
+		pentags_list_1 << pentag
 	end
-	# p pentags_0_10000.max 
-	number_of_hashes = pentags_0_10000.max/hash_buffer
+	# p pentags_list_1
+	# p pentags_list_1.max 
+	number_of_hashes = pentags_list_1.max/hash_buffer
 	# p "number_of_hashes is #{number_of_hashes}"
 	(1..number_of_hashes).each do |threshhold|
 		pent_hash[threshhold*hash_buffer] = []
 	end
 	# p pent_hash
 	# SO WHAT WE HAVE HERE IS A HASH WHERE THE KEY IS THE MAX THRESHHOLD
+	
 	pent_hash.each do |key, value|
-		p key
+		while pentags_list_1.empty? == false
+			shifter  = pentags_list_1.shift()
+		# pentags_list_1.each do |p|
+			if shifter <= key
+				value << shifter
+			elsif shifter > key
+				break
+			end
+		end
 	end
 	return pent_hash
 end
 
-# mad_pentagonals
+# def hash_populator()
+
+p mad_pentagonals
 
 # def is_pentagonal(num, list)
 # 	if list.include?(num) == true
@@ -77,6 +91,7 @@ def hash_check()
 	# so you are working with a joint where keys are thresholds and the values
 	# are empty lists
 	pent_hash = mad_pentagonals()
+end
 
 
 
