@@ -42,11 +42,9 @@
 def mad_pentagonals()
 	pent_hash = {}
 	hash_buffer = 50000
-
 	(1..10000).each do |num|
 		pentag = num*((3*num)-1)/2
 		pentags_0_10000 << pentag	
-	
 	end
 	# p pentags_0_10000.max 
 	number_of_hashes = pentags_0_10000.max/hash_buffer
@@ -60,7 +58,6 @@ def mad_pentagonals()
 		p key
 	end
 	return pent_hash
-	# return pentags_0_10000#,pentags_10001_50000,pentags_50001_100000, pentags_100001_150000, pentags_greater_150001
 end
 
 # mad_pentagonals
