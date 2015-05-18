@@ -19,7 +19,7 @@
 def mad_pentagonals()
 	pent_hash = {}
 	hash_buffer = 50000
-	maximum_loops = 100000
+	maximum_loops = 1000000
 	pentags_list_1 = []
 	pentags_list_2 = []
 	(1..maximum_loops).each do |num|
