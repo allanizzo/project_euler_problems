@@ -19,7 +19,7 @@
 def mad_pentagonals()
 	pent_hash = {}
 	hash_buffer = 50000
-	maximum_loops = 1000000
+	maximum_loops = 100000
 	pentags_list_1 = []
 	pentags_list_2 = []
 	(1..maximum_loops).each do |num|
@@ -96,9 +96,30 @@ def hash_check()
 	while pk <= max_index_of_list
 		buffer_down = [buffer_main,(buffer_main-(buffer_main-pk)).abs].min  # this is then pk is less than buffer_main
 		buffer_up = [buffer_main, (max_index_of_list)-pk].min # this adjusts for when the end of list is near and goesto 0
-		pj_low = pk - buffer_down
+		pj_low = [buffer_down, pk].max
+
 		pj_high = pk + buffer_up
 		pj = pj_low
+		p "pk is #{pk}"
+		p "buffer_down is #{buffer_down} and buffer_up is #{buffer_up}"
+		p "pj_low is #{pj_low} and pj_high is #{pj_high}"
+
+		list_of_pentags[pj_low..pj_high].each do |ele|
+			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
+			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
+			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
+			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
+			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
+			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
+
+			# move the add and diffs up here, as everything resets off of pk now
+			# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+		end
+
+		pk += 1
+
+	end
+
 		while pj <= pj_high
 			# p "pj_low is #{pj_low} and pj_high is #{pj_high}"
 			diff_abs = (list_of_pentags[pk]-list_of_pentags[pj]).abs
@@ -112,6 +133,7 @@ def hash_check()
 			# p "diff_abs is #{diff_abs}"
 				end
 			end
+			sleep(0.001)
 			pj += 1
 		end
 		pk += 1
