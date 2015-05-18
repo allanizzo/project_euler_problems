@@ -15,34 +15,11 @@
 # for which their sum and difference are
 # pentagonal and D = |Pk − Pj| is minimised; what is the value of D?
 
-# def mad_pentagonals_dict()
-# 	pk_dict = {}
-# 	pj_dict = {}
-# 	(1..1000000).each do |num|
-# 		pent = num*((3*num)-1)/2
-# 		p pent/num.to_f
-# 		pk_dict[num] = pent
-# 		pk_dict[num] = pent
-# 	end
-# 	return pk_dict,pj_dict
-# end
-
-# # mad_pentagonals_dict
-
-
-# def checker2()
-# 	pk_dict,pj_dict = mad_pentagonals_dict()
-	
-# 	pk_dict.each do |key, value|
-# 		pj_count = 1
-# 		while pj_count
-
-
 
 def mad_pentagonals()
 	pent_hash = {}
 	hash_buffer = 50000
-	maximum_loops = 10000
+	maximum_loops = 100000
 	pentags_list_1 = []
 	pentags_list_2 = []
 	(1..maximum_loops).each do |num|
@@ -53,6 +30,7 @@ def mad_pentagonals()
 		pentags_list_1 << pentag
 		pentags_list_2 << pentag
 	end
+	pentags_list_2 = pentags_list_2[0..(pentags_list_2.count)/2]
 	# pentags_list_2 = pentags_list_1
 	# p pentags_list_1
 	# p pentags_list_1.max 
@@ -88,7 +66,6 @@ end
 
 def is_pentagonal(num, hashtable, hash_buffer)
 	# step one is to find the right key in the dictionary
-
 	# so num comes in, see how many times hash_buffer comes 
 	# p hashtable
 	hash_index = (num/hash_buffer) + 1
@@ -96,7 +73,6 @@ def is_pentagonal(num, hashtable, hash_buffer)
 	# hashtable.each do |key, value|
 		# p "key is #{key}"
 	# end
-
 	if hashtable[key_lookup] == nil
 		return false
 	elsif hashtable[key_lookup].include?(num) == true
@@ -111,19 +87,20 @@ end
 # p is_pentagonal(852397,mad_pentagonals, 50000)
 
 def hash_check()
-	# what is the goal here?
-	# the goal is the check whether sums or differences are pentagonal
-	# and then record progress
-	# so you are working with a joint where keys are threshholds and the value
-	# is a list of all the numbers that fit good
 	pent_hash, hash_buffer, list_of_pentags = mad_pentagonals()
 	pk = 0
+	buffer_main = 100
 	smallest_diff = 5**800 # large number so it will be guaranteed to come down
-	# p list_of_pentags
+	max_index_of_list = list_of_pentags.count-1
 	diff_list = []
-	while pk <= list_of_pentags.count-1
-		pj = 0
-		while pj <= list_of_pentags.count-1
+	while pk <= max_index_of_list
+		buffer_down = [buffer_main,(buffer_main-(buffer_main-pk)).abs].min  # this is then pk is less than buffer_main
+		buffer_up = [buffer_main, (max_index_of_list)-pk].min # this adjusts for when the end of list is near and goesto 0
+		pj_low = pk - buffer_down
+		pj_high = pk + buffer_up
+		pj = pj_low
+		while pj <= pj_high
+			# p "pj_low is #{pj_low} and pj_high is #{pj_high}"
 			diff_abs = (list_of_pentags[pk]-list_of_pentags[pj]).abs
 			sum_adds = (list_of_pentags[pk]+list_of_pentags[pj])
 			if is_pentagonal(diff_abs, pent_hash, hash_buffer) == true && is_pentagonal(sum_adds,pent_hash,hash_buffer) == true
@@ -152,6 +129,28 @@ p hash_check
 #############################################################################
 #############################################################################
 
+
+# def mad_pentagonals_dict()
+# 	pk_dict = {}
+# 	pj_dict = {}
+# 	(1..1000000).each do |num|
+# 		pent = num*((3*num)-1)/2
+# 		p pent/num.to_f
+# 		pk_dict[num] = pent
+# 		pk_dict[num] = pent
+# 	end
+# 	return pk_dict,pj_dict
+# end
+
+# # mad_pentagonals_dict
+
+
+# def checker2()
+# 	pk_dict,pj_dict = mad_pentagonals_dict()
+	
+# 	pk_dict.each do |key, value|
+# 		pj_count = 1
+# 		while pj_count
 # def is_pentagonal(num, list)
 # 	if list.include?(num) == true
 # 		return true
