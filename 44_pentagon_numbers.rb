@@ -93,18 +93,23 @@ def hash_check()
 	smallest_diff = 5**800 # large number so it will be guaranteed to come down
 	max_index_of_list = list_of_pentags.count-1
 	diff_list = []
-	while pk <= max_index_of_list
+	while pk < max_index_of_list
 		buffer_down = [buffer_main,(buffer_main-(buffer_main-pk)).abs].min  # this is then pk is less than buffer_main
 		buffer_up = [buffer_main, (max_index_of_list)-pk].min # this adjusts for when the end of list is near and goesto 0
 		pj_low = [buffer_down, pk].max
-
 		pj_high = pk + buffer_up
-		pj = pj_low
+		# pj = pj_low
 		p "pk is #{pk}"
 		p "buffer_down is #{buffer_down} and buffer_up is #{buffer_up}"
 		p "pj_low is #{pj_low} and pj_high is #{pj_high}"
 
 		list_of_pentags[pj_low..pj_high].each do |ele|
+			# say pk is 7, you want to index from 0 to 107
+			# say pk is 57, you want to index from 0 to 157
+			# say pk is 100, you want to index from 0 to 200 (or 199 idk yet)
+			# say pk is 137, you want to index from 37 to 237
+			# so while i like the jazz up there, i think it unnecessary
+
 			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
 			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
 			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
