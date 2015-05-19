@@ -40,16 +40,16 @@ def is_natural_number(num)
 	end
 end
 
-p is_natural_number(9.0)
-p is_natural_number(9.4)
+# p is_natural_number(9.0)
+# p is_natural_number(9.4)
 
 def is_pentagonal(x)
 	n = ((((24*x)+1)**0.5)+1)/6.0
-	# if is_natural_number(n) == true
-	# 	return true
-	# else
-	# 	return false
-	# end
+	if is_natural_number(n) == true
+		return true
+	else
+		return false
+	end
 	p n 	 
 end
 
@@ -57,33 +57,34 @@ end
 # 	p is_pentagonal(jazz)
 # end
 
-def hash_check()
-	pent_hash, hash_buffer, list_of_pentags = mad_pentagonals()
-	pk = 0
-	buffer_main = 100
-	smallest_diff = 5**800 # large number so it will be guaranteed to come down
-	max_index_of_list = list_of_pentags.count-1
+def sum_diff_check()
+	mad_big_pent_list = mad_pentagonals()
+	max_index_of_list = (mad_big_pent_list.count)-1
+	pk = 50
 	diff_list = []
-	p diff_list
-	p max_index_of_list
-	while pk < max_index_of_list
-		p pk
-		pj_low = [0,pk-buffer_main].max # should be 0 until pk is 100 then it increases by 1
-		pj_high = [buffer_main+pk,max_index_of_list-pk].min # say list is 1000 long, pk is 979 so we want pj_high to be 21
-		# p "pk is #{pk}"
-		p "pj_low is #{pj_low} and pj_high is #{pj_high}"
-		list_of_pentags[pj_low..pj_high].each do |pj|
-			pk = pk
-			pj = pj
-			diff_abs = (list_of_pentags[pk]-pj).abs
-			sum_adds = (list_of_pentags[pk]+pj)
-			if is_pentagonal(diff_abs, pent_hash, hash_buffer) == true && is_pentagonal(sum_adds,pent_hash,hash_buffer) == true
-				if diff_abs < smallest_diff
-					diff_list = "pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"
+	buffer = 50
+	while pk <= max_index_of_list
+		pj_low = pk - buffer
+		pj_high = pk + buffer
+		while pj_low <= pj_high
+			# need to adjust it off of pk
+			# pj_buffer = [[0,pk-buffer].max,(max_index_of_list-pk)].min
+			# p "pj_buffer is #{pj_buffer}"
+			# p "pj is #{pj}"
+			# p mad_big_pent_list[pk]-mad_big_pent_list[pj_low]
+			if mad_big_pent_list[pk] != nil && mad_big_pent_list[pj_low] != nil
+
+				diff = (mad_big_pent_list[pk]-mad_big_pent_list[pj_low]).abs
+				add = mad_big_pent_list[pk]+mad_big_pent_list[pj_low]
+				# if pj_low == pk
+				# 	next
+				if is_pentagonal(diff) == true and is_pentagonal(add) == true
+					diff_list << [pk,pj_low,diff]
 				end
 			end
-			# sleep(0.001)			
+			pj_low += 1
 		end
+		# p "pk is #{pk}"
 		if pk % 1000 == 0
 			p "pk is #{pk}"
 		end
@@ -92,10 +93,17 @@ def hash_check()
 	return diff_list
 end
 
-# p hash_check
+# 		pj_low = [0,pk-buffer].max # should be 0 until pk is 100 then it increases by 1
+# 		pj_high = [buffer+pk,max_index_of_list-pk].min # say list is 1000 long, pk is 979 so we want pj_high to be 21
+
+p sum_diff_check
 
 #  TRY 1 --> "pk is 998, pj is 958 and diff is 117460"
 
+#############################################################################
+#############################################################################
+#############################################################################
+#############################################################################
 #############################################################################
 #############################################################################
 #############################################################################
