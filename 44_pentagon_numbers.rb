@@ -94,57 +94,27 @@ def hash_check()
 	max_index_of_list = list_of_pentags.count-1
 	diff_list = []
 	while pk < max_index_of_list
-		buffer_down = [buffer_main,(buffer_main-(buffer_main-pk)).abs].min  # this is then pk is less than buffer_main
-		buffer_up = [buffer_main, (max_index_of_list)-pk].min # this adjusts for when the end of list is near and goesto 0
-		pj_low = [buffer_down, pk].max
-		pj_high = pk + buffer_up
-		# pj = pj_low
+
+		pj_low = [0,pk-buffer_main].max # should be 0 until pk is 100 then it increases by 1
+		pj_high = [buffer_main,max_index_of_list-pk].min # say list is 1000 long, pk is 979 so we want pj_high to be 21
 		p "pk is #{pk}"
 		p "buffer_down is #{buffer_down} and buffer_up is #{buffer_up}"
 		p "pj_low is #{pj_low} and pj_high is #{pj_high}"
-
-		list_of_pentags[pj_low..pj_high].each do |ele|
-			# say pk is 7, you want to index from 0 to 107
-			# say pk is 57, you want to index from 0 to 157
-			# say pk is 100, you want to index from 0 to 200 (or 199 idk yet)
-			# say pk is 137, you want to index from 37 to 237
-			# so while i like the jazz up there, i think it unnecessary
-
-			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
-			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
-			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
-			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
-			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
-			#>>>>>>>>>>>>>>>>> bang it here? <<<<<<<<<<<<<<<<<#
-
-			# move the add and diffs up here, as everything resets off of pk now
-			# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-		end
-
-		pk += 1
-
-	end
-
-		while pj <= pj_high
-			# p "pj_low is #{pj_low} and pj_high is #{pj_high}"
+		list_of_pentags[pj_low..pj_high].each do |pj|
+			pk = list_of_pentags[pk]
+			pj = pj
 			diff_abs = (list_of_pentags[pk]-list_of_pentags[pj]).abs
 			sum_adds = (list_of_pentags[pk]+list_of_pentags[pj])
 			if is_pentagonal(diff_abs, pent_hash, hash_buffer) == true && is_pentagonal(sum_adds,pent_hash,hash_buffer) == true
 				if diff_abs < smallest_diff
 					diff_list = "pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"
-				# diff_list << ["pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"]
-			# must check if diff is pentagonal
-			# we must take the diff and plug it into the hash in the right place for .include?
-			# p "diff_abs is #{diff_abs}"
 				end
 			end
-			sleep(0.001)
-			pj += 1
+			sleep(0.001)			
 		end
 		pk += 1
 	end
 	return diff_list
-	# idk if you solved anything tho
 end
 
 p hash_check
@@ -155,6 +125,34 @@ p hash_check
 #############################################################################
 #############################################################################
 #############################################################################
+
+		# buffer_down = [buffer_main,(buffer_main-(buffer_main-pk)).abs].min  # this is then pk is less than buffer_main
+		# buffer_up = [buffer_main, (max_index_of_list)-pk].min # this adjusts for when the end of list is near and goesto 0
+		# pj_low = [buffer_down, pk].max
+		# pj_high = pk + buffer_up
+		# pj = pj_low	
+			# say pk is 7, you want to index from 0 to 107
+			# say pk is 57, you want to index from 0 to 157
+			# say pk is 100, you want to index from 0 to 200 (or 199 idk yet)
+			# say pk is 137, you want to index from 37 to 237
+			# so while i like the jazz up there, i think it unnecessary	
+		# while pj <= pj_high
+		# 	# p "pj_low is #{pj_low} and pj_high is #{pj_high}"
+		# 	diff_abs = (list_of_pentags[pk]-list_of_pentags[pj]).abs
+		# 	sum_adds = (list_of_pentags[pk]+list_of_pentags[pj])
+		# 	if is_pentagonal(diff_abs, pent_hash, hash_buffer) == true && is_pentagonal(sum_adds,pent_hash,hash_buffer) == true
+		# 		if diff_abs < smallest_diff
+		# 			diff_list = "pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"
+		# 		# diff_list << ["pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"]
+		# 	# must check if diff is pentagonal
+		# 	# we must take the diff and plug it into the hash in the right place for .include?
+		# 	# p "diff_abs is #{diff_abs}"
+		# 		end
+		# 	end
+		# 	sleep(0.001)
+		# 	pj += 1
+		# end
+		# pk += 1
 
 
 # def mad_pentagonals_dict()
