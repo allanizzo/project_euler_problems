@@ -17,78 +17,45 @@
 
 
 def mad_pentagonals()
-	pent_hash = {}
-	
+	pent_list = []
 	maximum_loops = 1000000
-
-	hash_buffer = 100000
-	
-	pentags_list_1 = []
-	pentags_list_2 = []
-
 	(1..maximum_loops).each do |num|
 		if num % 1000 == 0
 			p num
 		end
-		pentag = num*((3*num)-1)/2
-		pentags_list_1 << pentag
-		pentags_list_2 << pentag
+		pent_list << num*((3*num)-1)/2
 	end
-	pentags_list_2 = pentags_list_2[0..(pentags_list_2.count)/2]
-	# pentags_list_2 = pentags_list_1
-	# p pentags_list_1
-	# p pentags_list_1.max 
-	number_of_hashes = pentags_list_1.max/hash_buffer
-	# p "number_of_hashes is #{number_of_hashes}"
-	(1..number_of_hashes).each do |threshhold|
-		pent_hash[threshhold*hash_buffer] = []
-	end
-	# p pent_hash
-	# SO WHAT WE HAVE HERE IS A HASH WHERE THE KEY IS THE MAX THRESHHOLD
-	
-	pent_hash.each do |key, value|
-		while pentags_list_1.empty? == false
-			shifter  = pentags_list_1.shift()
-		# pentags_list_1.each do |p|
-			if shifter <= key
-				value << shifter
-			elsif shifter > key
-				break
-			end
-		end
-	end
-	# p pentags_list_2
-	# p pent_hash
-	# pent_hash.each do |key, value|
-		# p key
-	# end
-	# p pent_hash[50000]
-	return pent_hash, hash_buffer, pentags_list_2
+	return pent_list
 end
 
-p mad_pentagonals
+# p mad_pentagonals
 
-def is_pentagonal(num, hashtable, hash_buffer)
-	# step one is to find the right key in the dictionary
-	# so num comes in, see how many times hash_buffer comes 
-	# p hashtable
-	hash_index = (num/hash_buffer) + 1
-	key_lookup = hash_index*hash_buffer # need to check for 0-50k here
-	# hashtable.each do |key, value|
-		# p "key is #{key}"
-	# end
-	if hashtable[key_lookup] == nil
+def is_natural_number(num)
+	num = num.to_s
+	num_list = num.split(".")
+	if num_list[1].match /[1-9]/  # REGEX RANGE OF DIGITS FUCKING FINALLY!!!!!!!!!!!!!!!!!!!
 		return false
-	elsif hashtable[key_lookup].include?(num) == true
-		return true
 	else
-		return false
+		return true
 	end
-
-	# step two is to return the value (list) and run .include?
 end
 
-# p is_pentagonal(852397,mad_pentagonals, 50000)
+p is_natural_number(9.0)
+p is_natural_number(9.4)
+
+def is_pentagonal(x)
+	n = ((((24*x)+1)**0.5)+1)/6.0
+	# if is_natural_number(n) == true
+	# 	return true
+	# else
+	# 	return false
+	# end
+	p n 	 
+end
+
+# (1..36).each do |jazz|
+# 	p is_pentagonal(jazz)
+# end
 
 def hash_check()
 	pent_hash, hash_buffer, list_of_pentags = mad_pentagonals()
@@ -133,6 +100,117 @@ end
 #############################################################################
 #############################################################################
 #############################################################################
+
+# def mad_pentagonals()
+# 	pent_hash = {}
+	
+# 	maximum_loops = 1000000
+
+# 	hash_buffer = 100000
+	
+# 	pentags_list_1 = []
+# 	pentags_list_2 = []
+
+# 	(1..maximum_loops).each do |num|
+# 		if num % 1000 == 0
+# 			p num
+# 		end
+# 		pentag = num*((3*num)-1)/2
+# 		pentags_list_1 << pentag
+# 		pentags_list_2 << pentag
+# 	end
+# 	pentags_list_2 = pentags_list_2[0..(pentags_list_2.count)/2]
+# 	# pentags_list_2 = pentags_list_1
+# 	# p pentags_list_1
+# 	# p pentags_list_1.max 
+# 	number_of_hashes = pentags_list_1.max/hash_buffer
+# 	# p "number_of_hashes is #{number_of_hashes}"
+# 	(1..number_of_hashes).each do |threshhold|
+# 		pent_hash[threshhold*hash_buffer] = []
+# 	end
+# 	# p pent_hash
+# 	# SO WHAT WE HAVE HERE IS A HASH WHERE THE KEY IS THE MAX THRESHHOLD
+	
+# 	pent_hash.each do |key, value|
+# 		while pentags_list_1.empty? == false
+# 			shifter  = pentags_list_1.shift()
+# 		# pentags_list_1.each do |p|
+# 			if shifter <= key
+# 				value << shifter
+# 			elsif shifter > key
+# 				break
+# 			end
+# 		end
+# 	end
+# 	# p pentags_list_2
+# 	# p pent_hash
+# 	# pent_hash.each do |key, value|
+# 		# p key
+# 	# end
+# 	# p pent_hash[50000]
+# 	return pent_hash, hash_buffer, pentags_list_2
+# end
+
+# p mad_pentagonals
+
+# def is_pentagonal(num, hashtable, hash_buffer)
+# 	# step one is to find the right key in the dictionary
+# 	# so num comes in, see how many times hash_buffer comes 
+# 	# p hashtable
+# 	hash_index = (num/hash_buffer) + 1
+# 	key_lookup = hash_index*hash_buffer # need to check for 0-50k here
+# 	# hashtable.each do |key, value|
+# 		# p "key is #{key}"
+# 	# end
+# 	if hashtable[key_lookup] == nil
+# 		return false
+# 	elsif hashtable[key_lookup].include?(num) == true
+# 		return true
+# 	else
+# 		return false
+# 	end
+
+# 	# step two is to return the value (list) and run .include?
+# end
+
+# # p is_pentagonal(852397,mad_pentagonals, 50000)
+
+# def hash_check()
+# 	pent_hash, hash_buffer, list_of_pentags = mad_pentagonals()
+# 	pk = 0
+# 	buffer_main = 100
+# 	smallest_diff = 5**800 # large number so it will be guaranteed to come down
+# 	max_index_of_list = list_of_pentags.count-1
+# 	diff_list = []
+# 	p diff_list
+# 	p max_index_of_list
+# 	while pk < max_index_of_list
+# 		p pk
+# 		pj_low = [0,pk-buffer_main].max # should be 0 until pk is 100 then it increases by 1
+# 		pj_high = [buffer_main+pk,max_index_of_list-pk].min # say list is 1000 long, pk is 979 so we want pj_high to be 21
+# 		# p "pk is #{pk}"
+# 		p "pj_low is #{pj_low} and pj_high is #{pj_high}"
+# 		list_of_pentags[pj_low..pj_high].each do |pj|
+# 			pk = pk
+# 			pj = pj
+# 			diff_abs = (list_of_pentags[pk]-pj).abs
+# 			sum_adds = (list_of_pentags[pk]+pj)
+# 			if is_pentagonal(diff_abs, pent_hash, hash_buffer) == true && is_pentagonal(sum_adds,pent_hash,hash_buffer) == true
+# 				if diff_abs < smallest_diff
+# 					diff_list = "pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"
+# 				end
+# 			end
+# 			# sleep(0.001)			
+# 		end
+# 		if pk % 1000 == 0
+# 			p "pk is #{pk}"
+# 		end
+# 		pk += 1
+# 	end
+# 	return diff_list
+# end
+
+# # p hash_check
 
 		# buffer_down = [buffer_main,(buffer_main-(buffer_main-pk)).abs].min  # this is then pk is less than buffer_main
 		# buffer_up = [buffer_main, (max_index_of_list)-pk].min # this adjusts for when the end of list is near and goesto 0
