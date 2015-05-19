@@ -18,10 +18,14 @@
 
 def mad_pentagonals()
 	pent_hash = {}
-	hash_buffer = 50000
-	maximum_loops = 100000
+	
+	maximum_loops = 1000000
+
+	hash_buffer = 100000
+	
 	pentags_list_1 = []
 	pentags_list_2 = []
+
 	(1..maximum_loops).each do |num|
 		if num % 1000 == 0
 			p num
@@ -62,7 +66,7 @@ def mad_pentagonals()
 	return pent_hash, hash_buffer, pentags_list_2
 end
 
-# mad_pentagonals
+p mad_pentagonals
 
 def is_pentagonal(num, hashtable, hash_buffer)
 	# step one is to find the right key in the dictionary
@@ -93,31 +97,35 @@ def hash_check()
 	smallest_diff = 5**800 # large number so it will be guaranteed to come down
 	max_index_of_list = list_of_pentags.count-1
 	diff_list = []
+	p diff_list
+	p max_index_of_list
 	while pk < max_index_of_list
-
+		p pk
 		pj_low = [0,pk-buffer_main].max # should be 0 until pk is 100 then it increases by 1
-		pj_high = [buffer_main,max_index_of_list-pk].min # say list is 1000 long, pk is 979 so we want pj_high to be 21
-		p "pk is #{pk}"
-		p "buffer_down is #{buffer_down} and buffer_up is #{buffer_up}"
+		pj_high = [buffer_main+pk,max_index_of_list-pk].min # say list is 1000 long, pk is 979 so we want pj_high to be 21
+		# p "pk is #{pk}"
 		p "pj_low is #{pj_low} and pj_high is #{pj_high}"
 		list_of_pentags[pj_low..pj_high].each do |pj|
-			pk = list_of_pentags[pk]
+			pk = pk
 			pj = pj
-			diff_abs = (list_of_pentags[pk]-list_of_pentags[pj]).abs
-			sum_adds = (list_of_pentags[pk]+list_of_pentags[pj])
+			diff_abs = (list_of_pentags[pk]-pj).abs
+			sum_adds = (list_of_pentags[pk]+pj)
 			if is_pentagonal(diff_abs, pent_hash, hash_buffer) == true && is_pentagonal(sum_adds,pent_hash,hash_buffer) == true
 				if diff_abs < smallest_diff
 					diff_list = "pk is #{pk}, pj is #{pj} and diff is #{diff_abs}"
 				end
 			end
-			sleep(0.001)			
+			# sleep(0.001)			
+		end
+		if pk % 1000 == 0
+			p "pk is #{pk}"
 		end
 		pk += 1
 	end
 	return diff_list
 end
 
-p hash_check
+# p hash_check
 
 #  TRY 1 --> "pk is 998, pj is 958 and diff is 117460"
 
