@@ -11,8 +11,59 @@
 # Find the next triangle number that is also
 # pentagonal and hexagonal.
 
-((y)*(y+1))/2 = ((n)*(3n-1))/2
+# test for pentagonal number
 
-y*(y+1) = n*(3n-1)
+def is_natural_number(num)
+	num = num.to_s
+	num_list = num.split(".")
+	if num_list[1].match /[1-9]/  # REGEX RANGE OF DIGITS FUCKING FINALLY!!!!!!!!!!!!!!!!!!!
+		return false
+	else
+		return true
+	end
+end
 
+def is_pentagonal(x)
+	n = ((((24*x)+1)**0.5)+1)/6.0
+	if is_natural_number(n) == true
+		return true
+	else
+		return false
+	end	 
+end
+
+def is_hexagonal(x)
+	n = ((((8*x)+1)**0.5)+1)/4.0
+	p n
+	if is_natural_number(n) == true
+		return true
+	else
+		return false
+	end	 
+end
+
+# p is_pentagonal(40755)
+# p is_hexagonal(40755)
+
+def triangulator()
+	anser_list = []
+	tri = 1
+	answer_count = 0
+	while answer_count < 3
+		# p tri
+		n = tri*(tri+1)/2
+		# p n
+		if is_pentagonal(n) == true && is_hexagonal(n) == true
+			p "bootywhop"
+			anser_list << ["tri is #{tri},answer_count is #{answer_count} and n is #{n}"]
+			answer_count += 1
+		end
+		tri += 1
+		# sleep(0.01)
+	end
+	return anser_list
+end
+		
+
+p triangulator
 
