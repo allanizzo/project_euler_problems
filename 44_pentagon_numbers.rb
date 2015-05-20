@@ -15,6 +15,9 @@
 # for which their sum and difference are
 # pentagonal and D = |Pk − Pj| is minimised; what is the value of D?
 
+# add in timer for script
+# add in eggplants cheya boi
+
 def is_natural_number(num)
 	num = num.to_s
 	num_list = num.split(".")
