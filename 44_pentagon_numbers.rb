@@ -15,21 +15,6 @@
 # for which their sum and difference are
 # pentagonal and D = |Pk − Pj| is minimised; what is the value of D?
 
-
-def mad_pentagonals()
-	pent_list = []
-	maximum_loops = 1000000
-	(1..maximum_loops).each do |num|
-		if num % 1000 == 0
-			p num
-		end
-		pent_list << num*((3*num)-1)/2
-	end
-	return pent_list
-end
-
-# p mad_pentagonals
-
 def is_natural_number(num)
 	num = num.to_s
 	num_list = num.split(".")
@@ -46,12 +31,67 @@ end
 def is_pentagonal(x)
 	n = ((((24*x)+1)**0.5)+1)/6.0
 	if is_natural_number(n) == true
+		# p n
 		return true
 	else
 		return false
 	end
-	p n 	 
+	# p n 	 
 end
+
+# p is_pentagonal(210)
+
+def mad_pentagonals()
+	pent_list = []
+	maximum_loops = 10000
+	(1..maximum_loops).each do |num|
+		# if num % 1000 == 0
+		# 	# p num
+		# end
+		pent_list << num*((3*num)-1)/2
+	end
+	return pent_list
+end
+
+def arr_sum(arr)
+	sum = arr[0]+arr[1]
+	return sum
+end
+
+def arr_diff(arr)
+	diff = (arr[1]-arr[0]).abs
+	return diff
+end
+
+
+
+def checker()
+	list = mad_pentagonals
+	# p list[1..100]
+	# p list
+	anserlist = []
+	combo_arr = list.combination(2).to_a
+	# p combo_arr
+	combo_arr.each do |arr|
+		# p arr_sum(arr)
+		# p arr_diff(arr)
+		if is_pentagonal(arr_sum(arr)) == true && is_pentagonal(arr_diff(arr)) == true
+			anserlist << ["diff is #{arr_diff(arr)}, sum is #{arr_sum(arr)} and arr is #{arr}"]
+		end
+	end
+
+	return anserlist
+end
+
+p checker
+
+# answer at 1000 loops says
+# [[70],[173230],[61721]]
+
+
+# p mad_pentagonals
+
+
 
 # (1..36).each do |jazz|
 # 	p is_pentagonal(jazz)
@@ -62,7 +102,7 @@ def sum_diff_check()
 	max_index_of_list = (mad_big_pent_list.count)-1
 	pk = 50
 	diff_list = []
-	buffer = 50
+	buffer = 10
 	while pk <= max_index_of_list
 		pj_low = pk - buffer
 		pj_high = pk + buffer
@@ -96,7 +136,7 @@ end
 # 		pj_low = [0,pk-buffer].max # should be 0 until pk is 100 then it increases by 1
 # 		pj_high = [buffer+pk,max_index_of_list-pk].min # say list is 1000 long, pk is 979 so we want pj_high to be 21
 
-p sum_diff_check
+# p sum_diff_check
 
 #  TRY 1 --> "pk is 998, pj is 958 and diff is 117460"
 
