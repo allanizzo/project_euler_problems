@@ -40,26 +40,55 @@ no printing i want this to work
 
 
 
+def is_prime(num)
+	divisor = 2
+	while divisor < num
+		if num%divisor == 0
+			return false
+		end
+		divisor += 1
+	end
+	return true
+end
+
+def prime_number_less_than_list_creator(num)
+	less_than_prime_list = []
+	divisor = 2
+	while divisor < num
+
+
+def consec_4_prime_check(num_1,num_2,num_3,num_4, hash)
+
+
+end
+
+
 
 def num_runner()
 	start_time = Time.new
-	num_1 = 1
-	num_2 = 2
-	num_3 = 3
-	num_4 = 4
-	anser_list = []
-	while true
-		#we break and return when 4 consecutive numbers have distinct prime factors
+	num_1 = 10
+	num_2 = num_1+1
+	num_3 = num_2+1
+	num_4 = num_3+1
 
-		if consec_4_prime_check(num_1,num_2,num_3,num_4) == true
-			end_time = Time.new
-			return [num_1,num_2,num_3,num_4,("calctime is #{end_time-start_time}")]
+	prime_factorhash = {}
+
+
+	while true
+
+
+
+		if consec_4_prime_check(num_1,num_2,num_3,num_4, prime_factorhash) == true
+			end_time = Time.new # may need to be moved up
+			return [num_1,num_2,num_3,num_4,"calctime is #{end_time-start_time}"]
 		end
 
 		num_1 += 1
 		num_2 += 1
 		num_3 += 1
 		num_4 += 1
+
+		prime_factorhash[num_4] = something
 	end
 
 end
