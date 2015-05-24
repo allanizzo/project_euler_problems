@@ -53,13 +53,37 @@ end
 
 def prime_number_less_than_list_creator(num)
 	less_than_prime_list = []
-	divisor = 2
-	while divisor < num
+	potential_less_than_prime = 2
+	while potential_less_than_prime < num
+		if is_prime(potential_less_than_prime) == true
+			less_than_prime_list << potential_less_than_prime
+		end
+		potential_less_than_prime += 1
+	end
+	return less_than_prime_list
+end
+
+def arr_mult
+	dont forget about exponents here
 
 
 def consec_4_prime_check(num_1,num_2,num_3,num_4, hash)
-
-
+	# each number coming in and has a key and the values are lists of primes smaller than it
+	primes1 = hash[num_1].combination(4).to_a
+	if arr_mult(primes1) == true
+		primes2 = hash[num_2].combination(4).to_a
+		if arr_mult(primes2) == true
+			primes3 = hash[num_3].combination(4).to_a
+			if arr_mult(primes3) == true
+				primes4 = hash[num_4].combination(4).to_a
+				if arr_mult(primes4) == true
+					return true
+				end
+			end
+		end
+	else
+		return false
+	end
 end
 
 
@@ -70,14 +94,12 @@ def num_runner()
 	num_2 = num_1+1
 	num_3 = num_2+1
 	num_4 = num_3+1
-
-	prime_factorhash = {}
-
-
+	prime_factorhash = {num_1 => prime_number_less_than_list_creator(num_1),
+		num_2 => prime_number_less_than_list_creator(num_2),
+		num_3 => prime_number_less_than_list_creator(num_3),
+		num_4 => prime_number_less_than_list_creator(num_4)
+	}
 	while true
-
-
-
 		if consec_4_prime_check(num_1,num_2,num_3,num_4, prime_factorhash) == true
 			end_time = Time.new # may need to be moved up
 			return [num_1,num_2,num_3,num_4,"calctime is #{end_time-start_time}"]
@@ -88,7 +110,11 @@ def num_runner()
 		num_3 += 1
 		num_4 += 1
 
-		prime_factorhash[num_4] = something
+		prime_factorhash[num_1] = prime_factorhash[num_2]
+		prime_factorhash[num_2] = prime_factorhash[num_3]
+		prime_factorhash[num_3] = prime_factorhash[num_4]
+		prime_factorhash[num_4] = prime_number_less_than_list_creator(num_4)
+	
 	end
 
 end
