@@ -65,14 +65,6 @@ end
 
 # p prime_number_less_than_list_creator(100)
 
-def arr_cleaner(arr)
-	# comes in like [[arr]]
-	new_arr = []
-	arr[0].each do |ele|
-		new_arr << ele
-	end
-	return new_arr
-end
 
 def arr_mult(arr, num)
 	# so incoming is an array with 4 prime factors
