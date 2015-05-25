@@ -78,9 +78,9 @@ def arr_mult(arr, num)
 	# so incoming is an array with 4 prime factors
 	# we need to check to see if any combo works
 	# as well as any combos with exponents
-	p "arr is #{arr}"
+	# p "arr is #{arr}"
 	arr.each do |mini_arr|
-		p "mini_arr is #{mini_arr}"
+		# p "mini_arr is #{mini_arr}"
 		product = mini_arr[0]*mini_arr[1]*mini_arr[2]*mini_arr[3]
 		if product == num
 			return true
@@ -94,8 +94,8 @@ end
 
 def consec_4_prime_check(num_1,num_2,num_3,num_4, hash)
 	# each number coming in and has a key and the values are lists of primes smaller than it
-	p "hash is #{hash}"
-	p "num_1 is #{num_1}"
+	# p "hash is #{hash}"
+	# p "num_1 is #{num_1}"
 	primes1 = hash[num_1].combination(4).to_a
 	if arr_mult(primes1,num_1) == true
 		primes2 = hash[num_2].combination(4).to_a
@@ -126,7 +126,7 @@ def num_runner()
 		num_3 => prime_number_less_than_list_creator(num_3),
 		num_4 => prime_number_less_than_list_creator(num_4)
 	}
-	p prime_factorhash
+	# p prime_factorhash
 	while true
 		if consec_4_prime_check(num_1,num_2,num_3,num_4, prime_factorhash) == true
 			end_time = Time.new # may need to be moved up
@@ -138,11 +138,16 @@ def num_runner()
 		num_3 += 1
 		num_4 += 1
 
-		prime_factorhash[num_1] = prime_factorhash[num_2]
-		prime_factorhash[num_2] = prime_factorhash[num_3]
-		prime_factorhash[num_3] = prime_factorhash[num_4]
-		prime_factorhash[num_4] = prime_number_less_than_list_creator(num_4)
-	
+		# prime_factorhash[num_1] = prime_factorhash[num_2]
+		# prime_factorhash[num_2] = prime_factorhash[num_3]
+		# prime_factorhash[num_3] = prime_factorhash[num_4]
+		# prime_factorhash[num_4] = prime_number_less_than_list_creator(num_4)
+		prime_factorhash = {num_1 => prime_number_less_than_list_creator(num_1),
+		num_2 => prime_number_less_than_list_creator(num_2),
+		num_3 => prime_number_less_than_list_creator(num_3),
+		num_4 => prime_number_less_than_list_creator(num_4)
+			}
+
 	end
 
 end
