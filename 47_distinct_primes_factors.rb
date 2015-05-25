@@ -20,23 +20,23 @@
 # of these numbers?
 
 
-okey, so you start running up numbers
+# okey, so you start running up numbers
 
-then pull three at a time and run the check
+# then pull three at a time and run the check
 
-the check involves creating a prime list
-	note though, we dont need to redo every time
-	we can simply create a hash with the number and all of its prime factors
+# the check involves creating a prime list
+# 	note though, we dont need to redo every time
+# 	we can simply create a hash with the number and all of its prime factors
 
-	then we do combination(4) of the prime_list and see if any of the mults == that number
+# 	then we do combination(4) of the prime_list and see if any of the mults == that number
 
-		important!! need to check to make sure all of the factors are distinct
+# 		important!! need to check to make sure all of the factors are distinct
 
-	if not, then we need a way to start raising different numbers to different powers to check
-	starting with one at a time, then all, etc... etc...
-	^^ this is probably the trickiest part coding wise
+# 	if not, then we need a way to start raising different numbers to different powers to check
+# 	starting with one at a time, then all, etc... etc...
+# 	^^ this is probably the trickiest part coding wise
 
-no printing i want this to work
+# no printing i want this to work
 
 
 
@@ -63,20 +63,35 @@ def prime_number_less_than_list_creator(num)
 	return less_than_prime_list
 end
 
-def arr_mult
-	dont forget about exponents here
+def arr_mult(arr, num)
+	# so incoming is an array with 4 prime factors
+	# we need to check to see if any combo works
+	# as well as any combos with exponents
+	product = arr[0]*arr[1]*arr[2]*arr[3]
+	if product == num
+		return true
+	else
+		while index <= arr.count-1
+			exponent = 2
+			index = 0
+			arr[0..index].each do |exp|
+				exp_ele = exp**exponent
+			end
+		end
+	end
+end
 
 
 def consec_4_prime_check(num_1,num_2,num_3,num_4, hash)
 	# each number coming in and has a key and the values are lists of primes smaller than it
 	primes1 = hash[num_1].combination(4).to_a
-	if arr_mult(primes1) == true
+	if arr_mult(primes1,num_1) == true
 		primes2 = hash[num_2].combination(4).to_a
-		if arr_mult(primes2) == true
+		if arr_mult(primes2,num_2) == true
 			primes3 = hash[num_3].combination(4).to_a
-			if arr_mult(primes3) == true
+			if arr_mult(primes3,num_3) == true
 				primes4 = hash[num_4].combination(4).to_a
-				if arr_mult(primes4) == true
+				if arr_mult(primes4,num_4) == true
 					return true
 				end
 			end
