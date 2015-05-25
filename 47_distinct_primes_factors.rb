@@ -75,6 +75,11 @@ def arr_mult(arr, num)
 			exponent = 2
 			index = 0
 			arr[0..index].each do |exp|
+				count = 0
+				while count <= arr.count-1
+					first = arr.shift()
+					arr << first
+					# do the rest here
 				exp_ele = exp**exponent
 			end
 		end
