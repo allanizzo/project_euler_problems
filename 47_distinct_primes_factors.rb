@@ -63,32 +63,39 @@ def prime_number_less_than_list_creator(num)
 	return less_than_prime_list
 end
 
+# p prime_number_less_than_list_creator(100)
+
+def arr_cleaner(arr)
+	# comes in like [[arr]]
+	new_arr = []
+	arr[0].each do |ele|
+		new_arr << ele
+	end
+	return new_arr
+end
+
 def arr_mult(arr, num)
 	# so incoming is an array with 4 prime factors
 	# we need to check to see if any combo works
 	# as well as any combos with exponents
-	product = arr[0]*arr[1]*arr[2]*arr[3]
-	if product == num
-		return true
-	else
-		while index <= arr.count-1
-			exponent = 2
-			index = 0
-			arr[0..index].each do |exp|
-				count = 0
-				while count <= arr.count-1
-					first = arr.shift()
-					arr << first
-					# do the rest here
-				exp_ele = exp**exponent
-			end
+	p "arr is #{arr}"
+	arr.each do |mini_arr|
+		p "mini_arr is #{mini_arr}"
+		product = mini_arr[0]*mini_arr[1]*mini_arr[2]*mini_arr[3]
+		if product == num
+			return true
 		end
+
 	end
+	return false
 end
+
 
 
 def consec_4_prime_check(num_1,num_2,num_3,num_4, hash)
 	# each number coming in and has a key and the values are lists of primes smaller than it
+	p "hash is #{hash}"
+	p "num_1 is #{num_1}"
 	primes1 = hash[num_1].combination(4).to_a
 	if arr_mult(primes1,num_1) == true
 		primes2 = hash[num_2].combination(4).to_a
@@ -119,6 +126,7 @@ def num_runner()
 		num_3 => prime_number_less_than_list_creator(num_3),
 		num_4 => prime_number_less_than_list_creator(num_4)
 	}
+	p prime_factorhash
 	while true
 		if consec_4_prime_check(num_1,num_2,num_3,num_4, prime_factorhash) == true
 			end_time = Time.new # may need to be moved up
@@ -138,3 +146,41 @@ def num_runner()
 	end
 
 end
+
+p num_runner()
+
+
+# ********************************************************************************  #
+# ********************************************************************************  #
+# ********************************************************************************  #
+# ********************************************************************************  #
+# ********************************************************************************  #
+# ********************************************************************************  #
+
+
+
+
+	# 	end
+	# else
+	# 	index = 0
+	# 	arr_clone = arr
+	# 	exponent = 2
+	# 	while exponent <= 10
+	# 		while index <= arr.count-1
+	# 			arr_clone[0..index].map! do |ele|
+	# 				p "ele is #{ele}"
+	# 				ele = ele**exponent
+	# 				4.times do 
+	# 					shifter = arr_clone.shift()
+	# 					arr_clone << shifter
+	# 					product = arr_clone[0]*arr_clone[1]*arr_clone[2]*arr_clone[3]
+	# 					if product == num
+	# 						return true
+	# 					end
+	# 					# calculate produce here
+	# 				end
+	# 			end
+	# 			index += 1
+	# 		end
+	# 		exponent += 1
+	# 	end
