@@ -36,16 +36,6 @@ def is_prime(num)
 	return true
 end
 
-def four_dig_prime_creator()
-	prime_list = []
-	(1000..1100).each do |num|
-		if is_prime(num) == true
-			prime_list << num
-		end
-	end
-	return prime_list
-end
-
 def string_converter(num)
 	# 123455
 	list = []
@@ -56,38 +46,99 @@ def string_converter(num)
 	return list
 end
 
-def joiner(array)
-	new_arr = []
-	numstring = ""
-	array.each do |m|
-		# p m.to_s
-		numstring << m.to_s
+def sequence_adder(addition,num)
+	arr = [num]
+	2.times do 
+		arr << arr.last+addition
 	end
-	return numstring.to_i
+	return arr
 end
 
+# p sequence_adder(1,3)
 
-def permutation_checker()
-	prime_list = four_dig_prime_creator()
-	p prime_list
-	perm_list = []
-	prime_list.each do |element|
-		perm_list << string_converter(element).permutation(4).to_a
-	end
-	clean_list = []
-	perm_list.each do |p|
-		p.each do |j|
-			clean_list << j
+def is_prime_array(array)
+	array.each do |ele|
+		if is_prime(ele) == false
+			return false
 		end
 	end
-
-	clean_list.map! do |jiggler|
-		joiner(jiggler)
-	end
-
-	return clean_list
+	return true
 end
-p permutation_checker
+
+def permutation_jawns(array)
+	# checks to see if the terms are permutations of one another
+	first_perm = string_converter(array[0])
+	first_perm = first_perm.permutation(4).to_a
+
+end
+
+def brute_force_1()
+	start_time = Time.new
+	anser_list = []
+	max = 9999
+	(1000..max).each do |num|
+		addition  = 1
+		if is_prime(num) == false
+			next
+		end
+		while addition <= max#/addition
+			seq = sequence_adder(addition,num)
+			# check seq here
+			p permutation_jawns(seq)
+			p seq
+			addition += 1
+			sleep(1)
+		end
+		
+	end
+	end_time = Time.new
+	return "time is #{end_time-start_time}"
+end
+
+p brute_force_1
+
+
+
+# def joiner(array)
+# 	new_arr = []
+# 	numstring = ""
+# 	array.each do |m|
+# 		# p m.to_s
+# 		numstring << m.to_s
+# 	end
+# 	return numstring.to_i
+# end
+
+
+# def permutation_checker()
+# 	prime_list = four_dig_prime_creator()
+# 	p prime_list
+# 	# perm_list = []
+# 	perm_hash = {}
+# 	prime_list.each do |element|
+# 		# perm_list << string_converter(element).permutation(4).to_a
+# 		perm_hash[element] = string_converter(element).permutation(4).to_a
+# 	end
+
+
+		
+# 	# p perm_hash	
+
+# 	# clean_list = []
+# 	# perm_list.each do |p|
+# 	# 	p.each do |j|
+# 	# 		clean_list << j
+# 	# 	end
+# 	# end
+
+# 	# clean_list.map! do |jiggler|
+# 	# 	joiner(jiggler)
+# 	# end
+
+# 	# return clean_list
+# end
+
+# permutation_checker
 
 		# perm_list = element
 
