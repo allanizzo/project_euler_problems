@@ -60,6 +60,7 @@ def joiner(array)
 	new_arr = []
 	numstring = ""
 	array.each do |m|
+		# p m.to_s
 		numstring << m.to_s
 	end
 	return numstring.to_i
@@ -79,6 +80,11 @@ def permutation_checker()
 			clean_list << j
 		end
 	end
+
+	clean_list.map! do |jiggler|
+		joiner(jiggler)
+	end
+
 	return clean_list
 end
 p permutation_checker
