@@ -68,8 +68,16 @@ end
 def permutation_jawns(array)
 	# checks to see if the terms are permutations of one another
 	first_perm = string_converter(array[0])
-	first_perm = first_perm.permutation(4).to_a
-
+	first_perm = first_perm.permutation(4).to_a # list of all the permutations of the first ##
+	# p "first_perm is #{first_perm}"
+	# p "string converter is #{string_converter(array[1])}"
+	# p "string converter is #{string_converter(array[2])}"
+	if first_perm.include?(string_converter(array[1])) == true && first_perm.include?(string_converter(array[2])) == true
+		return true
+	else
+		return false
+	# p array
+	end
 end
 
 def brute_force_1()
@@ -77,25 +85,30 @@ def brute_force_1()
 	anser_list = []
 	max = 9999
 	(1000..max).each do |num|
-		addition  = 1
+		addition  = 3330
 		if is_prime(num) == false
 			next
 		end
 		while addition <= max#/addition
 			seq = sequence_adder(addition,num)
 			# check seq here
-			p permutation_jawns(seq)
-			p seq
+			# p permutation_jawns(seq)
+			if permutation_jawns(seq) == true
+				p "bootywhop"
+				anser_list << seq
+			end
+			# p seq
 			addition += 1
-			sleep(1)
+			# sleep(1)
 		end
-		
 	end
 	end_time = Time.new
-	return "time is #{end_time-start_time}"
+	return "time is #{(end_time-start_time)}", anser_list
 end
 
 p brute_force_1
+
+def straight_deezy()
 
 
 
