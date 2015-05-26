@@ -67,6 +67,11 @@ end
 
 def permutation_jawns(array)
 	# checks to see if the terms are permutations of one another
+	array.each do |onefittyone|
+		if is_prime(onefittyone) == false
+			return false
+		end
+	end
 	first_perm = string_converter(array[0])
 	first_perm = first_perm.permutation(4).to_a # list of all the permutations of the first ##
 	# p "first_perm is #{first_perm}"
@@ -98,18 +103,28 @@ def brute_force_1()
 				anser_list << seq
 			end
 			# p seq
-			addition += 1
+			addition += 3330
 			# sleep(1)
 		end
 	end
+	actual_anser_list = []
+	anser_list.each do |imgladiputsunscreenontoday|
+		sun_string = ""
+		imgladiputsunscreenontoday.each do |ididntgettooburned|
+			sun_string << ididntgettooburned.to_s
+		end
+		actual_anser_list << sun_string
+	end
+
+
 	end_time = Time.new
-	return "time is #{(end_time-start_time)}", anser_list
+	return "time is #{(end_time-start_time)}", anser_list, actual_anser_list
 end
 
 p brute_force_1
 
 def straight_deezy()
-
+end
 
 
 # def joiner(array)
