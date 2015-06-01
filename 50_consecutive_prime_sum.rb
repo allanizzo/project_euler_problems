@@ -75,9 +75,30 @@ end
 
 def is_prime_sum()
 	prime_list = prime_list_creator()
+	# hi_index = 1
+	largest_consec_prime_sum = 0
+	while lo_index <= (prime_list.count)-2
+		sum = 0
+		lo_index = 0
+		hi_index = lo_index + 1
+		prime_list[lo_index..hi_index].each do |s|
+			sum += s
+		end
 
 
 
+		if is_prime_2(sum) == true
+			if sum > largest_consec_prime_sum && sum < 1000000
+				largest_consec_prime_sum = sum
+			end
+			hi_index += 1
+			
+		else is_prime_2(sum) == false
+			lo_index = 0 # marker fucked
+				
+		end
+	end
+	return largest_consec_prime_sum
 end
 
 # NOTES
