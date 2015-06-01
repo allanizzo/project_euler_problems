@@ -73,33 +73,53 @@ end
 
 # p prime_list_creator((10000)*100)
 
+def arr_range_sum(array_range)
+	sum = 0
+	array_range.each do |s|
+		sum += s
+	end
+	return sum
+end
+
 def is_prime_sum()
-	prime_list = prime_list_creator()
+	prime_list = prime_list_creator(1000)
 	# hi_index = 1
 	largest_consec_prime_sum = 0
+	lo_index = 0
 	while lo_index <= (prime_list.count)-2
-		sum = 0
-		lo_index = 0
+		# p "lo_index is #{lo_index}"
 		hi_index = lo_index + 1
-		prime_list[lo_index..hi_index].each do |s|
-			sum += s
-		end
-
-
-
-		if is_prime_2(sum) == true
+		while is_prime_2(arr_range_sum(prime_list[lo_index..hi_index])) == true
+			p "hi_index is #{hi_index}"
+			p prime_list[lo_index..hi_index]
+			sum = arr_range_sum(prime_list[lo_index..hi_index])
+			p sum
 			if sum > largest_consec_prime_sum && sum < 1000000
 				largest_consec_prime_sum = sum
-			end
+			end			
 			hi_index += 1
-			
-		else is_prime_2(sum) == false
-			lo_index = 0 # marker fucked
-				
 		end
+		lo_index += 1
 	end
 	return largest_consec_prime_sum
 end
+
+p is_prime_sum
+
+
+# 		if is_prime_2(sum) == true
+# 			if sum > largest_consec_prime_sum && sum < 1000000
+# 				largest_consec_prime_sum = sum
+# 			end
+# 			hi_index += 1
+			
+# 		else is_prime_2(sum) == false
+# 			lo_index = 0 # marker fucked
+				
+# 		end
+# 	end
+# 	return largest_consec_prime_sum
+# end
 
 # NOTES
 # is_prime calctime for 1MM loops is 24.624408 s with 78498 hits
