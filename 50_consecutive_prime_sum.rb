@@ -56,7 +56,7 @@ def is_prime_2(n)
 end
 
 def prime_list_creator(max)
-	start_time = Time.new
+	# start_time = Time.new
 	prime_list = [2]
 	counter = 3
 	while counter <= max
@@ -66,7 +66,7 @@ def prime_list_creator(max)
 		end
 		counter += 1
 	end
-	end_time = Time.new
+	# end_time = Time.new
 	# return "calctime is #{end_time-start_time}", "length of prime_list is #{prime_list.count}"
 	return prime_list
 end
@@ -82,13 +82,16 @@ def arr_range_sum(array_range)
 end
 
 def is_prime_sum()
-	prime_list = prime_list_creator(100)
+	start_time = Time.new
+	maxx = 1000000
+	prime_list = prime_list_creator(maxx)
 	largest_consec_prime_sum = 0
 	longest_num_count = 0
 	prime_dupe = prime_list
 	win_list = []
+	win_hash= {}
 	while prime_dupe.empty? == false
-		p prime_dupe
+		# p prime_dupe
 		sum = 0
 		num_counts = 0
 		dupe_index_lo = 0
@@ -99,17 +102,29 @@ def is_prime_sum()
 			if is_prime_2(sum) == false
 				num_counts = 0
 			elsif is_prime_2(sum) == true
-				num_counts += 1
-				if sum > largest_consec_prime_sum && num_counts > longest_num_count
-					largest_consec_prime_sum = sum
-					longest_num_count = num_counts
-				end
+				num_counts = prime_dupe[dupe_index_lo..dupe_index_hi].count
+				# win_hash[prime_dupe[dupe_index_lo..dupe_index_hi]] = [sum, num_counts]
+				# if sum > largest_consec_prime_sum && num_counts > longest_num_count
+				# 	largest_consec_prime_sum = sum
+				# 	longest_num_count = num_counts
+				# end
 			end
 			dupe_index_hi += 1
 		end
 		prime_dupe.shift()
 	end
-	return largest_consec_prime_sum, num_counts
+	largest_sum = 0
+	most_consecs = 0
+	win_hash.each do |key, value|
+		if value[0] > largest_sum && value[0] <= maxx && value[1] > most_consecs
+			largest_sum = value[0]
+			most_consecs = value[1]
+			# p "valye[0] is #{value[0]}"
+		end
+	end
+	end_time = Time.new
+	return "largest_sum is #{largest_sum}, most_consecs is #{most_consecs} and calctime is #{end_time-start_time}"
+	# return largest_consec_prime_sum, num_counts, win_hash
 end
 
 p is_prime_sum
