@@ -82,26 +82,34 @@ def arr_range_sum(array_range)
 end
 
 def is_prime_sum()
-	prime_list = prime_list_creator(1000)
-	# hi_index = 1
+	prime_list = prime_list_creator(100)
 	largest_consec_prime_sum = 0
-	lo_index = 0
-	while lo_index <= (prime_list.count)-2
-		# p "lo_index is #{lo_index}"
-		hi_index = lo_index + 1
-		while is_prime_2(arr_range_sum(prime_list[lo_index..hi_index])) == true
-			p "hi_index is #{hi_index}"
-			p prime_list[lo_index..hi_index]
-			sum = arr_range_sum(prime_list[lo_index..hi_index])
-			p sum
-			if sum > largest_consec_prime_sum && sum < 1000000
-				largest_consec_prime_sum = sum
-			end			
-			hi_index += 1
+	longest_num_count = 0
+	prime_dupe = prime_list
+	win_list = []
+	while prime_dupe.empty? == false
+		p prime_dupe
+		sum = 0
+		num_counts = 0
+		dupe_index_lo = 0
+		dupe_index_hi = 1
+		while dupe_index_hi <= prime_dupe.count()-1
+			sum = arr_range_sum(prime_dupe[dupe_index_lo..dupe_index_hi])
+			# p sum
+			if is_prime_2(sum) == false
+				num_counts = 0
+			elsif is_prime_2(sum) == true
+				num_counts += 1
+				if sum > largest_consec_prime_sum && num_counts > longest_num_count
+					largest_consec_prime_sum = sum
+					longest_num_count = num_counts
+				end
+			end
+			dupe_index_hi += 1
 		end
-		lo_index += 1
+		prime_dupe.shift()
 	end
-	return largest_consec_prime_sum
+	return largest_consec_prime_sum, num_counts
 end
 
 p is_prime_sum
@@ -124,3 +132,51 @@ p is_prime_sum
 # NOTES
 # is_prime calctime for 1MM loops is 24.624408 s with 78498 hits
 # is_prime_2 calctime for 1MM loops is 2.131122 s with 78498 hits
+
+
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+
+
+		# while true
+		# 	sum = arr_range_sum(prime_list[lo_index..hi_index])
+		# 	p "sum is #{sum}"
+		# 	if is_prime_2(arr_range_sum(prime_list[lo_index..hi_index])) == false
+		# 		break
+		# 	else
+		# 		p "hi_index is #{hi_index}"
+		# 		p "lo_index is #{lo_index}"
+		# 		p prime_list[lo_index..hi_index]
+		# 		sum = arr_range_sum(prime_list[lo_index..hi_index])
+		# 		p sum
+		# 		if sum > largest_consec_prime_sum && sum < 1000000
+		# 			largest_consec_prime_sum = sum
+		# 		end	
+		# 	end		
+		# 	hi_index += 1
+		# end
+		# lo_index += 1
+
+
+
+
+
+
+	# 		sum += ele
+	# 		p "sum is #{sum}"
+	# 		p "num_counts is #{num_counts}"
+	# 		if is_prime_2(sum) == true
+	# 			num_counts += 1
+	# 		elsif is_prime_2(sum) == false
+	# 			num_counts = 0
+	# 		end
+	# 		if	num_counts > longest_num_count && sum >= largest_consec_prime_sum 
+	# 			longest_num_count = num_counts
+	# 			largest_consec_prime_sum = sum
+	# 		end			
+	# 	end
+	# 	prime_dupe.shift()
+	# end
