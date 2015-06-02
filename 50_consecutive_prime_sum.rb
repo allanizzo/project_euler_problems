@@ -84,47 +84,75 @@ end
 def is_prime_sum()
 	start_time = Time.new
 	maxx = 1000000
+	# maxx = 1000
 	prime_list = prime_list_creator(maxx)
 	largest_consec_prime_sum = 0
 	longest_num_count = 0
 	prime_dupe = prime_list
 	win_list = []
-	win_hash= {}
+	# win_hash= {}
+	overall_count = 0
+	most_consecs = 0
 	while prime_dupe.empty? == false
+		# if largest_consec_prime_sum >= 1000
+		# 	return largest_consec_prime_sum
+		# end
 		# p prime_dupe
+		# p "overall_count is #{overall_count}" 
 		sum = 0
 		num_counts = 0
 		dupe_index_lo = 0
 		dupe_index_hi = 1
-		while dupe_index_hi <= prime_dupe.count()-1
-			sum = arr_range_sum(prime_dupe[dupe_index_lo..dupe_index_hi])
-			# p sum
+		
+		hash_count = 0
+		while dupe_index_hi <= prime_dupe.count()-1 #&& sum <= maxx
+
+			# sleep(0.5)
+
+			arr_range = prime_dupe[dupe_index_lo..dupe_index_hi]
+			sum = arr_range_sum(arr_range)
 			if is_prime_2(sum) == false
 				num_counts = 0
 			elsif is_prime_2(sum) == true
-				num_counts = prime_dupe[dupe_index_lo..dupe_index_hi].count
-				# win_hash[prime_dupe[dupe_index_lo..dupe_index_hi]] = [sum, num_counts]
-				# if sum > largest_consec_prime_sum && num_counts > longest_num_count
-				# 	largest_consec_prime_sum = sum
-				# 	longest_num_count = num_counts
-				# end
+				num_counts = arr_range.count
+				if largest_consec_prime_sum > maxx
+					end_time = Time.new
+					return ["most_consecs is #{most_consecs} and largest_consec_prime_sum is #{largest_consec_prime_sum},
+with a calctime of #{end_time-start_time}", win_list]
+				# p "largest_consec_prime_sum is #{largest_consec_prime_sum}"
+				end				# p "num_counts is #{num_counts}"
+				if num_counts > most_consecs
+					most_consecs = num_counts
+					largest_consec_prime_sum = sum
+					win_list << [most_consecs, largest_consec_prime_sum]
+
+				end
+				# win_hash[hash_count] = [num_counts,sum]
 			end
 			dupe_index_hi += 1
+			hash_count += 1
 		end
 		prime_dupe.shift()
-	end
-	largest_sum = 0
-	most_consecs = 0
-	win_hash.each do |key, value|
-		if value[0] > largest_sum && value[0] <= maxx && value[1] > most_consecs
-			largest_sum = value[0]
-			most_consecs = value[1]
-			# p "valye[0] is #{value[0]}"
+		overall_count += 1	
+		if overall_count % 10000 == 0
+			p "overall_count is #{overall_count}"
 		end
 	end
+	# largest_sum = 0
+	# most_consecs = 0
+	# win_hash.each do |key, value|
+	# 	if value[0] > largest_sum && value[0] <= maxx && value[1] > most_consecs
+	# 		largest_sum = value[0]
+	# 		most_consecs = value[1]
+	# 		# p "valye[0] is #{value[0]}"
+	# 	end
+	
+	# end
 	end_time = Time.new
-	return "largest_sum is #{largest_sum}, most_consecs is #{most_consecs} and calctime is #{end_time-start_time}"
-	# return largest_consec_prime_sum, num_counts, win_hash
+	# return "largest_sum is #{largest_sum}, most_consecs is #{most_consecs} and calctime is #{end_time-start_time}"
+	# return win_hash, most_consecs, largest_consec_prime_sum
+	return ["most_consecs is #{most_consecs} and largest_consec_prime_sum is #{largest_consec_prime_sum},
+	with a calctime of #{end_time-start_time}"]
 end
 
 p is_prime_sum
