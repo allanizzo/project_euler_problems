@@ -86,57 +86,49 @@ def is_prime_sum()
 	maxx = 1000000
 	# maxx = 1000
 	prime_list = prime_list_creator(maxx)
-	largest_consec_prime_sum = 0
-	longest_num_count = 0
+	# largest_consec_prime_sum = 0
+	# longest_num_count = 0
 	prime_dupe = prime_list
 	win_list = []
-	# win_hash= {}
+	win_hash= {}
 	overall_count = 0
-	most_consecs = 0
+	# most_consecs = 0
+	hash_count = 0
+	# mega_win_list = []
 	while prime_dupe.empty? == false
-		# if largest_consec_prime_sum >= 1000
-		# 	return largest_consec_prime_sum
-		# end
-		# p prime_dupe
-		# p "overall_count is #{overall_count}" 
 		sum = 0
 		num_counts = 0
 		dupe_index_lo = 0
-		dupe_index_hi = 1
+		dupe_index_hi = dupe_index_lo + 1
+
+		# p "prime_dupe is #{prime_dupe}"
 		
-		hash_count = 0
-		while dupe_index_hi <= prime_dupe.count()-1 #&& sum <= maxx
-
+		while dupe_index_hi <= prime_dupe.count()-1
 			# sleep(0.5)
-
 			arr_range = prime_dupe[dupe_index_lo..dupe_index_hi]
 			sum = arr_range_sum(arr_range)
-			if is_prime_2(sum) == false
-				num_counts = 0
-			elsif is_prime_2(sum) == true
+			# p "sum is #{sum}"
+			# if is_prime_2(sum) == false
+				# num_counts = 0
+			if is_prime_2(sum) == true
 				num_counts = arr_range.count
-				if largest_consec_prime_sum > maxx
-					end_time = Time.new
-					return ["most_consecs is #{most_consecs} and largest_consec_prime_sum is #{largest_consec_prime_sum},
-with a calctime of #{end_time-start_time}", win_list]
-				# p "largest_consec_prime_sum is #{largest_consec_prime_sum}"
-				end				# p "num_counts is #{num_counts}"
-				if num_counts > most_consecs
-					most_consecs = num_counts
-					largest_consec_prime_sum = sum
-					win_list << [most_consecs, largest_consec_prime_sum]
+				# p "arr_range #{arr_range}"
+				win_hash[hash_count] = [num_counts,sum]	
+				win_list << [sum, num_counts]
+				mega_win_list = [sum, num_counts]		
 
-				end
-				# win_hash[hash_count] = [num_counts,sum]
+				if sum > maxx
+					break
+				end					
 			end
 			dupe_index_hi += 1
 			hash_count += 1
 		end
 		prime_dupe.shift()
 		overall_count += 1	
-		if overall_count % 10000 == 0
-			p "overall_count is #{overall_count}"
-		end
+		# if overall_count % 10000 == 0
+		# 	p "overall_count is #{overall_count}"
+		# end
 	end
 	# largest_sum = 0
 	# most_consecs = 0
@@ -148,11 +140,29 @@ with a calctime of #{end_time-start_time}", win_list]
 	# 	end
 	
 	# end
-	end_time = Time.new
 	# return "largest_sum is #{largest_sum}, most_consecs is #{most_consecs} and calctime is #{end_time-start_time}"
 	# return win_hash, most_consecs, largest_consec_prime_sum
-	return ["most_consecs is #{most_consecs} and largest_consec_prime_sum is #{largest_consec_prime_sum},
-	with a calctime of #{end_time-start_time}"]
+	# return ["most_consecs is #{most_consecs} and largest_consec_prime_sum is #{largest_consec_prime_sum},
+	# with a calctime of #{end_time-start_time}"]
+	# return win_hash, "*****"*100, win_list.sort
+	# return mega_win_list
+
+	most_consecss = 0
+	biggest_sum = 0
+	final_chowrenge = []
+	# p win_list
+	win_list.each do |finally|
+		# p finally[1]
+		if finally[1] > most_consecss && finally[0] <= maxx
+			# p most_consecss
+			most_consecss = finally[1]
+			final_chowrenge = finally
+		end
+
+	end
+	end_time = Time.new
+	return "final_chowrenge is #{final_chowrenge} and calctime is #{end_time-start_time}"
+	# win_list is of format [sum,num_counts]
 end
 
 p is_prime_sum
